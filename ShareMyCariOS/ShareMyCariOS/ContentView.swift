@@ -8,14 +8,15 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Binding var menu : MenuItem
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
+        if menu == .login {
+            LoginView()
+        } else if menu == .register {
+            RegisterView()
+        } else {
+            GeneralPageLayout(menu: $menu)
+        }
     }
 }

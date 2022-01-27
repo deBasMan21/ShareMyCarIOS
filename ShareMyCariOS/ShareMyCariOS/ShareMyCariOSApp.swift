@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct ShareMyCariOSApp: App {
+    @State var menu : MenuItem = .home
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(menu: $menu)
         }
     }
 }
