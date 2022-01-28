@@ -24,6 +24,8 @@ struct RideDetailView: View {
     
     @State private var gridItems = [GridItem(.fixed(150), alignment: .topLeading), GridItem(.fixed(200), alignment: .topLeading)]
     
+    @State private var showUpdateRide : Bool = false
+    
     var itemslong: [GridItem] {
         Array(repeating: .init(.adaptive(minimum: 120), alignment: .topLeading), count: 2)
     }
@@ -31,20 +33,36 @@ struct RideDetailView: View {
     var body: some View {
         VStack{
             ScrollView{
-                SubTitleText(text: "Rit \(ride.id)")
+                SubTitleText(text: "Rit #\(ride.id)")
                 
                 LazyVGrid(columns: gridItems, alignment: .leading, spacing: 10){
                     Text("Naam:")
                     Text(ride.name)
                     Text("Begin moment:")
-                    Text(ride.beginDateTime)
+                    Text(Date.fromDateString(input: ride.beginDateTime).formatted())
                     Text("Eind moment:")
-                    Text(ride.endDateTime)
+                    Text(Date.fromDateString(input: ride.endDateTime).formatted())
                     Text("Auto:")
                     Text(ride.car?.name ?? "Not found")
                 }.padding(.horizontal)
                 
-                SubTitleText(text: "Locatie").padding(.top, 40)
+                SubTitleText(text: "Gebruiker").padding(.top, 40)
+                
+                LazyVGrid(columns: gridItems, alignment: .leading, spacing: 10){
+                    Text("Naam:")
+                    Text(ride.user?.name ?? "Not found")
+                    Text("Email:")
+                    Text(ride.user?.email ?? "Not found")
+                    Text("Telefoonnummer:")
+                    Text(ride.user?.phoneNumber ?? "Not found")
+                }.padding(.horizontal)
+                
+                Map(coordinateRegion: $region, showsUserLocation: true, annotationItems: markers){ marker in
+                    marker.location
+                }.frame(width: 400, height: 300)
+                    .padding(.vertical, 40)
+                
+                SubTitleText(text: "Locatie")
                 
                 LazyVGrid(columns: gridItems, alignment: .leading, spacing: 10){
                     Text("Locatie:")
@@ -57,18 +75,13 @@ struct RideDetailView: View {
                     Text(ride.destination?.city ?? "Not found")
                 }.padding(.horizontal)
                 
-                Map(coordinateRegion: $region, showsUserLocation: true, annotationItems: markers){ marker in
-                    marker.location
-                }.frame(width: 400, height: 300)
-                    .padding(.vertical, 40)
-                
-                SubTitleText(text: "Overige details:")
+                SubTitleText(text: "Overige details:").padding(.top, 40)
                 
                 LazyVGrid(columns: itemslong, alignment: .leading, spacing: 10){
                     Text("Aangemaakt op:")
-                    Text(ride.reservationDateTime)
+                    Text(Date.fromDateString(input: ride.reservationDateTime).formatted())
                     Text("Laatst aangepast op:")
-                    Text(ride.lastChangeDateTime)
+                    Text(Date.fromDateString(input: ride.lastChangeDateTime).formatted())
                     Text("Aangemaakt door:")
                     Text(ride.user?.name ?? "Not found")
                 }.padding(.horizontal)
@@ -81,7 +94,7 @@ struct RideDetailView: View {
                 Spacer()
                 
                 Button("Rit aanpassen", action: {
-                    print("update")
+                    showUpdateRide = true
                 }).padding(10)
                     .overlay(
                     RoundedRectangle(cornerRadius: 10)
@@ -91,7 +104,9 @@ struct RideDetailView: View {
                 Spacer()
                 
                 Button("Rit verwijderen", action: {
-                    print("delete")
+                    Task{
+                        await deleteRide()
+                    }
                     presentationMode.wrappedValue.dismiss()
                 }).padding(10)
                     .overlay(
@@ -107,6 +122,9 @@ struct RideDetailView: View {
                     await startRideDetail()
                 }
             })
+            .sheet(isPresented: $showUpdateRide){
+                UpdateRideView(showPopUp: $showUpdateRide, ride: ride, refresh: startRideDetail)
+            }
     }
     
     func startRideDetail() async {
@@ -115,7 +133,7 @@ struct RideDetailView: View {
             
             if result != nil {
                 ride = result!
-                
+
                 coordinates(forAddress: "\(ride.destination!.address), \(ride.destination!.city)"){
                     (location) in
                     guard let location = location else {
@@ -140,6 +158,14 @@ struct RideDetailView: View {
                 return
             }
             completion(placemarks?.first?.location?.coordinate)
+        }
+    }
+    
+    func deleteRide() async {
+        do{
+            _ = try await apiDeleteRide(rideId: ride.id)
+        } catch let error {
+            print(error)
         }
     }
 }

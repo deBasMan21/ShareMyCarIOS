@@ -17,6 +17,7 @@ struct CarDetailView: View {
     @State var shareCode: String = "A K 1 D"
     
     @State var showUpdateCar: Bool = false
+    @State var showCreateRide : Bool = false
     
     @State var rides : [Ride] = []
     
@@ -39,7 +40,8 @@ struct CarDetailView: View {
                         Spacer()
                         
                         Image("plus").onTapGesture(perform: {
-                            print("add ride")
+                            showCreateRide = true
+                            showUpdateCar = true
                         })
                     }.padding([.top, .leading, .trailing])
                     
@@ -116,7 +118,14 @@ struct CarDetailView: View {
                 }))
             }
             .sheet(isPresented: $showUpdateCar, content: {
-                UpdateCarView(showPopup: $showUpdateCar, toMain: backToHome, car: car)
+                if showCreateRide {
+                    CreateRideView(showPopUp: $showUpdateCar, car: car, refresh: startCarDetail)
+                        .onDisappear(perform: {
+                            showCreateRide = false
+                        })
+                } else {
+                    UpdateCarView(showPopup: $showUpdateCar, toMain: backToHome, car: car)
+                }
             })
             .onAppear(perform: {
                 Task{

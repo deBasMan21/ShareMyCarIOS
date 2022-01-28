@@ -19,7 +19,7 @@ struct RideView: View {
             Text(ride.destination?.name ?? "No destination")
                 .foregroundColor(.accentColor)
             
-            Text(ride.beginDateTime)
+            Text(Date.fromDateString(input: ride.beginDateTime).formatted())
                 .foregroundColor(.accentColor)
             
         }.padding()
