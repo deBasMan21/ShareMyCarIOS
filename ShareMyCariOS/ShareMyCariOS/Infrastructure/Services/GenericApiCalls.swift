@@ -8,7 +8,7 @@
 import Foundation
 
 func authorizedApiCall<T : Decodable>(url : String, body : [String : Any]?, method : String, obj: T) async throws -> T? {
-    let token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI5MjhlYjM0Yi1kNzUxLTRlMjQtOThhYy0xYjUyMjRjMmExMTciLCJuYW1lIjoic3RyaW5nIiwiZW1haWwiOiJzdHJpbmciLCJBc3BOZXQuSWRlbnRpdHkuU2VjdXJpdHlTdGFtcCI6IkxUN1hVRE5BVks3TEdDQzI2RjJVQ1k1Mkk1TTJYWUc2IiwiVXNlcklkIjoiNCIsIm5iZiI6MTY0MzM2MTYwNSwiZXhwIjoxNjQzNDQ4MDA1LCJpYXQiOjE2NDMzNjE2MDV9.VeUpW19qCgG9-jz6nwEbls3Z2pVatAIcjackXmQDpq0"
+    let token = "INSERT TOKEN HERE"
     
     let url = URL(string: url)!
     var request = URLRequest(url: url)
