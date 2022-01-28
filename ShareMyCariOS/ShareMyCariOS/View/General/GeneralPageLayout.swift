@@ -18,7 +18,7 @@ struct GeneralPageLayout: View {
                 } else if menu == .rides {
                     RidesView()
                 } else if menu == .settings {
-                    SettingsView()
+                    SettingsView(menu : $menu)
                 }
                 
                 Spacer()

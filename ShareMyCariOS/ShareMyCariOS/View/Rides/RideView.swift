@@ -19,6 +19,9 @@ struct RideView: View {
             Text(ride.destination?.name ?? "No destination")
                 .foregroundColor(.accentColor)
             
+            Text(ride.user?.name ?? "No user")
+                .foregroundColor(.accentColor)
+            
             Text(Date.fromDateString(input: ride.beginDateTime).formatted())
                 .foregroundColor(.accentColor)
             

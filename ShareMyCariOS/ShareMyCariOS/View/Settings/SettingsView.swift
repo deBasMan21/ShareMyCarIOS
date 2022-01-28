@@ -8,8 +8,13 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @Binding var menu : MenuItem
+    
     var body: some View {
-        Text("Hello, Settings!")
+        Button("Log uit", action: {
+            deleteAllTokens()
+            menu = .login
+        })
     }
 }
 

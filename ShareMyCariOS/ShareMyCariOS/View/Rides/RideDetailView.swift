@@ -26,6 +26,8 @@ struct RideDetailView: View {
     
     @State private var showUpdateRide : Bool = false
     
+    @State private var isOwner : Bool = false
+    
     var itemslong: [GridItem] {
         Array(repeating: .init(.adaptive(minimum: 120), alignment: .topLeading), count: 2)
     }
@@ -90,31 +92,33 @@ struct RideDetailView: View {
 
             Spacer()
             
-            HStack{
-                Spacer()
-                
-                Button("Rit aanpassen", action: {
-                    showUpdateRide = true
-                }).padding(10)
-                    .overlay(
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color("Secondary"), lineWidth: 1)
-                ).background(RoundedRectangle(cornerRadius: 10).fill(Color("Secondary")))
-                
-                Spacer()
-                
-                Button("Rit verwijderen", action: {
-                    Task{
-                        await deleteRide()
-                    }
-                    presentationMode.wrappedValue.dismiss()
-                }).padding(10)
-                    .overlay(
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(Color("Secondary"), lineWidth: 1)
-                ).background(RoundedRectangle(cornerRadius: 10).fill(Color("Secondary")))
-                
-                Spacer()
+            if isOwner{
+                HStack{
+                    Spacer()
+                    
+                    Button("Rit aanpassen", action: {
+                        showUpdateRide = true
+                    }).padding(10)
+                        .overlay(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color("Secondary"), lineWidth: 1)
+                    ).background(RoundedRectangle(cornerRadius: 10).fill(Color("Secondary")))
+                    
+                    Spacer()
+                    
+                    Button("Rit verwijderen", action: {
+                        Task{
+                            await deleteRide()
+                        }
+                        presentationMode.wrappedValue.dismiss()
+                    }).padding(10)
+                        .overlay(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color("Secondary"), lineWidth: 1)
+                    ).background(RoundedRectangle(cornerRadius: 10).fill(Color("Secondary")))
+                    
+                    Spacer()
+                }
             }
         }.navigationTitle(ride.name)
             .onAppear(perform: {
@@ -133,6 +137,8 @@ struct RideDetailView: View {
             
             if result != nil {
                 ride = result!
+                
+                isOwner = ride.user?.id == getUserIdFromChain()
 
                 coordinates(forAddress: "\(ride.destination!.address), \(ride.destination!.city)"){
                     (location) in

@@ -12,9 +12,9 @@ struct ContentView: View {
     
     var body: some View {
         if menu == .login {
-            LoginView()
+            LoginView(menu: $menu)
         } else if menu == .register {
-            RegisterView()
+            RegisterView(menu : $menu)
         } else {
             GeneralPageLayout(menu: $menu)
         }

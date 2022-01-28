@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     @Binding var menu : MenuItem
-    @State var user : User = User(id: 1, name: "Bas Buijsen", email: "bbuijsen@gmail.com", phoneNumber: "061234567", cars: [Car(id: 1, name: "Tesla", plate: "K-181-BK", image: "tesla", isOwner: true), Car(id: 1, name: "Tesla", plate: "K-181-BK", image: "tesla", isOwner: true), Car(id: 1, name: "Tesla", plate: "K-181-BK", image: "tesla", isOwner: true)])
+    @State var user : User = User(id: 1, name: "", email: "", phoneNumber: "", cars: [])
     
     @State var showAddCar : Bool = false
     

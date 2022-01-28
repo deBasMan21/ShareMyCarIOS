@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct ShareMyCariOSApp: App {
-    @State var menu : MenuItem = .home
+    @State var menu : MenuItem = .login
     
     var body: some Scene {
         WindowGroup {

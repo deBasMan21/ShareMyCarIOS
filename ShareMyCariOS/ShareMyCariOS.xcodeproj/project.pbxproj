@@ -47,6 +47,12 @@
 		EF518D9927A3F39B0082CC0A /* LocationWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF518D9827A3F39B0082CC0A /* LocationWrapper.swift */; };
 		EF518D9C27A3F6F30082CC0A /* CreateLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF518D9B27A3F6F30082CC0A /* CreateLocationView.swift */; };
 		EF518D9E27A401010082CC0A /* UpdateRideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF518D9D27A401010082CC0A /* UpdateRideView.swift */; };
+		EF518DA027A412FB0082CC0A /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF518D9F27A412FB0082CC0A /* AuthenticationService.swift */; };
+		EF518DA227A4140A0082CC0A /* AuthenticationsWrappers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF518DA127A4140A0082CC0A /* AuthenticationsWrappers.swift */; };
+		EF518DA527A415020082CC0A /* KeyChainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF518DA427A415020082CC0A /* KeyChainService.swift */; };
+		EF518DA727A4167E0082CC0A /* DataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF518DA627A4167E0082CC0A /* DataExtensions.swift */; };
+		EF518DAA27A416AD0082CC0A /* IntExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF518DA927A416AD0082CC0A /* IntExtensions.swift */; };
+		EF518DAC27A41E4B0082CC0A /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF518DAB27A41E4B0082CC0A /* LoadingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,6 +116,12 @@
 		EF518D9827A3F39B0082CC0A /* LocationWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationWrapper.swift; sourceTree = "<group>"; };
 		EF518D9B27A3F6F30082CC0A /* CreateLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateLocationView.swift; sourceTree = "<group>"; };
 		EF518D9D27A401010082CC0A /* UpdateRideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateRideView.swift; sourceTree = "<group>"; };
+		EF518D9F27A412FB0082CC0A /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
+		EF518DA127A4140A0082CC0A /* AuthenticationsWrappers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationsWrappers.swift; sourceTree = "<group>"; };
+		EF518DA427A415020082CC0A /* KeyChainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainService.swift; sourceTree = "<group>"; };
+		EF518DA627A4167E0082CC0A /* DataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtensions.swift; sourceTree = "<group>"; };
+		EF518DA927A416AD0082CC0A /* IntExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntExtensions.swift; sourceTree = "<group>"; };
+		EF518DAB27A41E4B0082CC0A /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -233,8 +245,8 @@
 		EF518D4C27A29D710082CC0A /* Logic */ = {
 			isa = PBXGroup;
 			children = (
+				EF518DA827A416810082CC0A /* Extensions */,
 				EF518D4927A29D580082CC0A /* Navigation */,
-				EF518D9427A3F1C30082CC0A /* DateExtensions.swift */,
 			);
 			path = Logic;
 			sourceTree = "<group>";
@@ -247,7 +259,6 @@
 				EF518D7A27A2D13C0082CC0A /* AddCarView.swift */,
 				EF518D8027A2D6C90082CC0A /* CarDetailView.swift */,
 				EF518D8427A2FD0C0082CC0A /* UpdateCarView.swift */,
-				EF518D9227A3EE940082CC0A /* CreateRideView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -271,6 +282,7 @@
 		EF518D6127A2A04A0082CC0A /* Rides */ = {
 			isa = PBXGroup;
 			children = (
+				EF518D9227A3EE940082CC0A /* CreateRideView.swift */,
 				EF518D8A27A316650082CC0A /* RideView.swift */,
 				EF518D5727A29F9D0082CC0A /* RidesView.swift */,
 				EF518D8C27A319230082CC0A /* RideDetailView.swift */,
@@ -299,6 +311,7 @@
 			isa = PBXGroup;
 			children = (
 				EF518D6727A2A6200082CC0A /* TextPresets.swift */,
+				EF518DAB27A41E4B0082CC0A /* LoadingView.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -322,6 +335,7 @@
 				EF518D8827A311E90082CC0A /* RidesWrapper.swift */,
 				EF518D9027A323430082CC0A /* RideWrapper.swift */,
 				EF518D9827A3F39B0082CC0A /* LocationWrapper.swift */,
+				EF518DA127A4140A0082CC0A /* AuthenticationsWrappers.swift */,
 			);
 			path = Wrappers;
 			sourceTree = "<group>";
@@ -329,11 +343,13 @@
 		EF518D7727A2CE940082CC0A /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				EF518DA327A414F80082CC0A /* keychain */,
 				EF518D7427A2CE230082CC0A /* UserService.swift */,
 				EF518D7C27A2D42B0082CC0A /* CarService.swift */,
 				EF518D8627A30FC30082CC0A /* GenericApiCalls.swift */,
 				EF518D8E27A322FF0082CC0A /* RideService.swift */,
 				EF518D9627A3F3620082CC0A /* LocationService.swift */,
+				EF518D9F27A412FB0082CC0A /* AuthenticationService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -344,6 +360,24 @@
 				EF518D9B27A3F6F30082CC0A /* CreateLocationView.swift */,
 			);
 			path = Location;
+			sourceTree = "<group>";
+		};
+		EF518DA327A414F80082CC0A /* keychain */ = {
+			isa = PBXGroup;
+			children = (
+				EF518DA427A415020082CC0A /* KeyChainService.swift */,
+			);
+			path = keychain;
+			sourceTree = "<group>";
+		};
+		EF518DA827A416810082CC0A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				EF518D9427A3F1C30082CC0A /* DateExtensions.swift */,
+				EF518DA627A4167E0082CC0A /* DataExtensions.swift */,
+				EF518DA927A416AD0082CC0A /* IntExtensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -478,16 +512,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF518D6F27A2A8E30082CC0A /* User.swift in Sources */,
+				EF518DA727A4167E0082CC0A /* DataExtensions.swift in Sources */,
 				EF518D9C27A3F6F30082CC0A /* CreateLocationView.swift in Sources */,
 				EF518D4E27A29D890082CC0A /* MenuItem.swift in Sources */,
 				EF518D5A27A29FA70082CC0A /* SettingsView.swift in Sources */,
 				EF518D7B27A2D13C0082CC0A /* AddCarView.swift in Sources */,
 				EF518D2227A29C180082CC0A /* ContentView.swift in Sources */,
 				EF518D9127A323430082CC0A /* RideWrapper.swift in Sources */,
+				EF518DA227A4140A0082CC0A /* AuthenticationsWrappers.swift in Sources */,
 				EF518D5627A29F8D0082CC0A /* HomeView.swift in Sources */,
 				EF518D7F27A2D4D70082CC0A /* CarWrapper.swift in Sources */,
 				EF518D8D27A319230082CC0A /* RideDetailView.swift in Sources */,
 				EF518D6527A2A0EA0082CC0A /* GeneralPageLayout.swift in Sources */,
+				EF518DAC27A41E4B0082CC0A /* LoadingView.swift in Sources */,
 				EF518D9927A3F39B0082CC0A /* LocationWrapper.swift in Sources */,
 				EF518D6B27A2A7CF0082CC0A /* Ride.swift in Sources */,
 				EF518D9527A3F1C30082CC0A /* DateExtensions.swift in Sources */,
@@ -503,14 +540,17 @@
 				EF518D7527A2CE230082CC0A /* UserService.swift in Sources */,
 				EF518D8727A30FC30082CC0A /* GenericApiCalls.swift in Sources */,
 				EF518D8F27A322FF0082CC0A /* RideService.swift in Sources */,
+				EF518DA527A415020082CC0A /* KeyChainService.swift in Sources */,
 				EF518D6D27A2A8970082CC0A /* Location.swift in Sources */,
 				EF518D8127A2D6C90082CC0A /* CarDetailView.swift in Sources */,
 				EF518D7927A2CEA20082CC0A /* UserWrapper.swift in Sources */,
 				EF518D7D27A2D42B0082CC0A /* CarService.swift in Sources */,
+				EF518DAA27A416AD0082CC0A /* IntExtensions.swift in Sources */,
 				EF518D8927A311E90082CC0A /* RidesWrapper.swift in Sources */,
 				EF518D7127A2A91F0082CC0A /* Car.swift in Sources */,
 				EF518D2027A29C180082CC0A /* ShareMyCariOSApp.swift in Sources */,
 				EF518D9727A3F3620082CC0A /* LocationService.swift in Sources */,
+				EF518DA027A412FB0082CC0A /* AuthenticationService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -83,7 +83,7 @@ struct CreateRideView: View {
             if result != nil {
                 locations = result!
             } else {
-                errorMessage = "Er is iets misgegaan bij het aanmaken van de rit"
+                errorMessage = "Je hebt nog geen locaties. Maak er een aan om deze rit te kunnen maken."
                 showError = true
             }
         } catch let error {
