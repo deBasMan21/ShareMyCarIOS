@@ -13,4 +13,5 @@ enum MenuItem {
     case register
     case rides
     case settings
+    case locations
 }

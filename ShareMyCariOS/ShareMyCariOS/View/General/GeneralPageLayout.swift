@@ -19,6 +19,8 @@ struct GeneralPageLayout: View {
                     RidesView()
                 } else if menu == .settings {
                     SettingsView(menu : $menu)
+                } else if menu == .locations {
+                    LocationsView()
                 }
                 
                 Spacer()
@@ -37,6 +39,12 @@ struct GeneralPageLayout: View {
                 
                 Image("CalendarIcon").onTapGesture {
                     menu = .rides
+                }
+                
+                Spacer()
+                
+                Image("MapIcon").onTapGesture {
+                    menu = .locations
                 }
                 
                 Spacer()

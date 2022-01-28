@@ -30,7 +30,9 @@ struct CreateLocationView: View {
                 TextField("Breda", text: $location.city)
             }
         }.navigationTitle("Locatie aanmaken")
-            .navigationBarItems(trailing:
+            .navigationBarItems(leading: Button("Annuleren", action: {
+                presentationMode.wrappedValue.dismiss()
+            }).foregroundColor(.blue) ,trailing:
                 Button("Locatie maken", action: {
                     Task{
                         await createLocation()

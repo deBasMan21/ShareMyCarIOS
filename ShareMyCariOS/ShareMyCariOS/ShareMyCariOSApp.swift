@@ -9,6 +9,7 @@ import SwiftUI
 
 @main
 struct ShareMyCariOSApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @State var menu : MenuItem = .login
     
     var body: some Scene {

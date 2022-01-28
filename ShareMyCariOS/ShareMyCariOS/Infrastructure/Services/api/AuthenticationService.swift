@@ -6,9 +6,12 @@
 //
 
 import Foundation
+import Firebase
 
 func apiLogin(email : String, password : String) async throws -> User? {
-    let json : [String : Any] = ["email" : email, "password": password, "fbtoken": "token"]
+    let fbToken = Messaging.messaging().fcmToken
+    
+    let json : [String : Any] = ["email" : email, "password": password, "fbtoken": fbToken ?? "undefined"]
     
     let data = try await apiCall(url: "\(apiURL)/authentication/login", body: json, method: "POST", obj: AuthenticationWrapper(result: AuthenticationBody(token: "", expireDate: "", user: nil)), authorized: false)
     
@@ -21,7 +24,9 @@ func apiLogin(email : String, password : String) async throws -> User? {
 }
 
 func apiRegister(email: String, password : String, name : String, phoneNumber : String) async throws -> User? {
-    let json : [String : Any] = ["email" : email, "password": password, "name": name, "phoneNumber": phoneNumber, "fbtoken": "token"]
+    let fbToken = Messaging.messaging().fcmToken
+    
+    let json : [String : Any] = ["email" : email, "password": password, "name": name, "phoneNumber": phoneNumber, "fbtoken": fbToken ?? "undefined"]
     
     let data = try await apiCall(url: "\(apiURL)/authentication/register", body: json, method: "POST", obj: AuthenticationWrapper(result: AuthenticationBody(token: "", expireDate: "", user: nil)), authorized: false)
     

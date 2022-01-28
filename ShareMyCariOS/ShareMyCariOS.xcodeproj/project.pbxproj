@@ -53,6 +53,13 @@
 		EF518DA727A4167E0082CC0A /* DataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF518DA627A4167E0082CC0A /* DataExtensions.swift */; };
 		EF518DAA27A416AD0082CC0A /* IntExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF518DA927A416AD0082CC0A /* IntExtensions.swift */; };
 		EF518DAC27A41E4B0082CC0A /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF518DAB27A41E4B0082CC0A /* LoadingView.swift */; };
+		EF518DAE27A437840082CC0A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EF518DAD27A437840082CC0A /* GoogleService-Info.plist */; };
+		EF518DB127A438000082CC0A /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = EF518DB027A438000082CC0A /* FirebaseAnalytics */; };
+		EF518DB327A438000082CC0A /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = EF518DB227A438000082CC0A /* FirebaseMessaging */; };
+		EF518DB527A438160082CC0A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF518DB427A438160082CC0A /* AppDelegate.swift */; };
+		EFF62EA627A449A50082E8A7 /* LocationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF62EA527A449A50082E8A7 /* LocationsView.swift */; };
+		EFF62EA927A44E000082E8A7 /* LocationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF62EA827A44E000082E8A7 /* LocationDetailView.swift */; };
+		EFF62EAB27A450050082E8A7 /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF62EAA27A450050082E8A7 /* LocationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -122,6 +129,12 @@
 		EF518DA627A4167E0082CC0A /* DataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataExtensions.swift; sourceTree = "<group>"; };
 		EF518DA927A416AD0082CC0A /* IntExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntExtensions.swift; sourceTree = "<group>"; };
 		EF518DAB27A41E4B0082CC0A /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		EF518DAD27A437840082CC0A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		EF518DB427A438160082CC0A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		EF518DB627A43A410082CC0A /* ShareMyCariOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ShareMyCariOS.entitlements; sourceTree = "<group>"; };
+		EFF62EA527A449A50082E8A7 /* LocationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsView.swift; sourceTree = "<group>"; };
+		EFF62EA827A44E000082E8A7 /* LocationDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailView.swift; sourceTree = "<group>"; };
+		EFF62EAA27A450050082E8A7 /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +142,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF518DB327A438000082CC0A /* FirebaseMessaging in Frameworks */,
+				EF518DB127A438000082CC0A /* FirebaseAnalytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -172,6 +187,8 @@
 		EF518D1E27A29C180082CC0A /* ShareMyCariOS */ = {
 			isa = PBXGroup;
 			children = (
+				EF518DB627A43A410082CC0A /* ShareMyCariOS.entitlements */,
+				EF518DAD27A437840082CC0A /* GoogleService-Info.plist */,
 				EF518D6927A2A7850082CC0A /* Domain */,
 				EF518D4C27A29D710082CC0A /* Logic */,
 				EF518D4B27A29D670082CC0A /* Infrastructure */,
@@ -181,6 +198,7 @@
 				EF518D2327A29C1C0082CC0A /* Assets.xcassets */,
 				EF518D2527A29C1C0082CC0A /* Preview Content */,
 				EF518D4F27A29DF90082CC0A /* .gitignore */,
+				EF518DB427A438160082CC0A /* AppDelegate.swift */,
 			);
 			path = ShareMyCariOS;
 			sourceTree = "<group>";
@@ -343,13 +361,8 @@
 		EF518D7727A2CE940082CC0A /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				EFF62EA727A44AAF0082E8A7 /* api */,
 				EF518DA327A414F80082CC0A /* keychain */,
-				EF518D7427A2CE230082CC0A /* UserService.swift */,
-				EF518D7C27A2D42B0082CC0A /* CarService.swift */,
-				EF518D8627A30FC30082CC0A /* GenericApiCalls.swift */,
-				EF518D8E27A322FF0082CC0A /* RideService.swift */,
-				EF518D9627A3F3620082CC0A /* LocationService.swift */,
-				EF518D9F27A412FB0082CC0A /* AuthenticationService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -358,6 +371,9 @@
 			isa = PBXGroup;
 			children = (
 				EF518D9B27A3F6F30082CC0A /* CreateLocationView.swift */,
+				EFF62EA527A449A50082E8A7 /* LocationsView.swift */,
+				EFF62EA827A44E000082E8A7 /* LocationDetailView.swift */,
+				EFF62EAA27A450050082E8A7 /* LocationView.swift */,
 			);
 			path = Location;
 			sourceTree = "<group>";
@@ -380,6 +396,19 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		EFF62EA727A44AAF0082E8A7 /* api */ = {
+			isa = PBXGroup;
+			children = (
+				EF518D7427A2CE230082CC0A /* UserService.swift */,
+				EF518D7C27A2D42B0082CC0A /* CarService.swift */,
+				EF518D8627A30FC30082CC0A /* GenericApiCalls.swift */,
+				EF518D8E27A322FF0082CC0A /* RideService.swift */,
+				EF518D9627A3F3620082CC0A /* LocationService.swift */,
+				EF518D9F27A412FB0082CC0A /* AuthenticationService.swift */,
+			);
+			path = api;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -396,6 +425,10 @@
 			dependencies = (
 			);
 			name = ShareMyCariOS;
+			packageProductDependencies = (
+				EF518DB027A438000082CC0A /* FirebaseAnalytics */,
+				EF518DB227A438000082CC0A /* FirebaseMessaging */,
+			);
 			productName = ShareMyCariOS;
 			productReference = EF518D1C27A29C180082CC0A /* ShareMyCariOS.app */;
 			productType = "com.apple.product-type.application";
@@ -468,6 +501,9 @@
 				Base,
 			);
 			mainGroup = EF518D1327A29C180082CC0A;
+			packageReferences = (
+				EF518DAF27A437FF0082CC0A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = EF518D1D27A29C180082CC0A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -485,6 +521,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF518D2727A29C1C0082CC0A /* Preview Assets.xcassets in Resources */,
+				EF518DAE27A437840082CC0A /* GoogleService-Info.plist in Resources */,
 				EF518D5027A29DF90082CC0A /* .gitignore in Resources */,
 				EF518D2427A29C1C0082CC0A /* Assets.xcassets in Resources */,
 			);
@@ -515,6 +552,7 @@
 				EF518DA727A4167E0082CC0A /* DataExtensions.swift in Sources */,
 				EF518D9C27A3F6F30082CC0A /* CreateLocationView.swift in Sources */,
 				EF518D4E27A29D890082CC0A /* MenuItem.swift in Sources */,
+				EF518DB527A438160082CC0A /* AppDelegate.swift in Sources */,
 				EF518D5A27A29FA70082CC0A /* SettingsView.swift in Sources */,
 				EF518D7B27A2D13C0082CC0A /* AddCarView.swift in Sources */,
 				EF518D2227A29C180082CC0A /* ContentView.swift in Sources */,
@@ -527,6 +565,7 @@
 				EF518DAC27A41E4B0082CC0A /* LoadingView.swift in Sources */,
 				EF518D9927A3F39B0082CC0A /* LocationWrapper.swift in Sources */,
 				EF518D6B27A2A7CF0082CC0A /* Ride.swift in Sources */,
+				EFF62EAB27A450050082E8A7 /* LocationView.swift in Sources */,
 				EF518D9527A3F1C30082CC0A /* DateExtensions.swift in Sources */,
 				EF518D6827A2A6200082CC0A /* TextPresets.swift in Sources */,
 				EF518D9E27A401010082CC0A /* UpdateRideView.swift in Sources */,
@@ -535,6 +574,7 @@
 				EF518D5827A29F9D0082CC0A /* RidesView.swift in Sources */,
 				EF518D6027A2A0440082CC0A /* RegisterView.swift in Sources */,
 				EF518D5227A29F780082CC0A /* LoginView.swift in Sources */,
+				EFF62EA627A449A50082E8A7 /* LocationsView.swift in Sources */,
 				EF518D7327A2AE3A0082CC0A /* CarView.swift in Sources */,
 				EF518D9327A3EE940082CC0A /* CreateRideView.swift in Sources */,
 				EF518D7527A2CE230082CC0A /* UserService.swift in Sources */,
@@ -549,6 +589,7 @@
 				EF518D8927A311E90082CC0A /* RidesWrapper.swift in Sources */,
 				EF518D7127A2A91F0082CC0A /* Car.swift in Sources */,
 				EF518D2027A29C180082CC0A /* ShareMyCariOSApp.swift in Sources */,
+				EFF62EA927A44E000082E8A7 /* LocationDetailView.swift in Sources */,
 				EF518D9727A3F3620082CC0A /* LocationService.swift in Sources */,
 				EF518DA027A412FB0082CC0A /* AuthenticationService.swift in Sources */,
 			);
@@ -708,6 +749,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ShareMyCariOS/ShareMyCariOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ShareMyCariOS/Preview Content\"";
@@ -717,6 +759,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -728,7 +771,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -737,6 +780,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ShareMyCariOS/ShareMyCariOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"ShareMyCariOS/Preview Content\"";
@@ -746,6 +790,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -757,7 +802,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -897,6 +942,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		EF518DAF27A437FF0082CC0A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		EF518DB027A438000082CC0A /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EF518DAF27A437FF0082CC0A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		EF518DB227A438000082CC0A /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EF518DAF27A437FF0082CC0A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = EF518D1427A29C180082CC0A /* Project object */;
 }

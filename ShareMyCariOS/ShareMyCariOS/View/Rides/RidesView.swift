@@ -9,6 +9,6 @@ import SwiftUI
 
 struct RidesView: View {
     var body: some View {
-        Text("Hello, Rides!")
+        Text("Hello, Rides!").navigationTitle("Jouw ritten")
     }
 }

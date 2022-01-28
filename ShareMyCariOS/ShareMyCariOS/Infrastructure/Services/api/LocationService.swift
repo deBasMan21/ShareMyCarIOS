@@ -20,3 +20,9 @@ func apiCreateLocation(location : Location) async throws -> Location? {
     
     return data?.result
 }
+
+func apiDeleteLocation(locationId : Int) async throws -> Location? {
+    let data = try await apiCall(url: "\(apiURL)/location/\(locationId)", body: nil, method: "DELETE", obj: LocationWrapper(result: Location(id: 0, address: "", zipCode: "", city: "", name: "")), authorized: true)
+    
+    return data?.result
+}

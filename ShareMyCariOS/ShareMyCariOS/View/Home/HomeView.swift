@@ -42,7 +42,7 @@ struct HomeView: View {
                         
                     }
                 }
-            }.navigationBarHidden(true)
+            }.navigationBarHidden(false)
                 .navigationBarTitle(Text("Home"))
                 .sheet(isPresented: $showAddCar, content: {
                     AddCarView(showPopup: $showAddCar, refresh: startHomePage)
@@ -51,7 +51,7 @@ struct HomeView: View {
             Task{
                 await startHomePage()
             }
-        })
+        }).navigationTitle("Home")
     }
     
     func startHomePage() async {
