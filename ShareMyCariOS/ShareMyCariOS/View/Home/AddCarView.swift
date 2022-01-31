@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import UIKit
+import Foundation
 
 struct AddCarView: View {
     @Binding var showPopup : Bool
@@ -19,6 +21,8 @@ struct AddCarView: View {
     @State var sharecode : String = ""
     @State var carId : String = ""
     
+    @State var selectedImage = UIImage(named: "tesla")!
+    @State var showImagePicker : Bool = false
     var body: some View {
         NavigationView{
             
@@ -40,7 +44,10 @@ struct AddCarView: View {
                         }
                         
                         Section(header: Text("Foto van de auto:")){
-                            TextField("tesla", text: $carImage)
+                            Text("Selecteer je foto").onTapGesture {
+                                showImagePicker = true
+                                convertImager()
+                            }
                         }
                     } else {
                         Section(header: Text("Auto id:")){
@@ -51,6 +58,8 @@ struct AddCarView: View {
                             TextField("KD6S", text: $sharecode)
                         }
                     }
+                }.sheet(isPresented: $showImagePicker){
+                    PhotoPicker(image: $selectedImage)
                 }
             }
             
@@ -67,6 +76,10 @@ struct AddCarView: View {
                 }
             }).foregroundColor(.blue))
         }
+    }
+    
+    func saveImage(image : UIImage?) {
+        selectedImage = image!
     }
     
     func createCar() async{
@@ -93,5 +106,14 @@ struct AddCarView: View {
         } catch let error {
             print(error)
         }
+    }
+    
+    func convertImager() {
+        let image : UIImage = UIImage(named:"tesla")!
+        //Now use image to create into NSData format
+        let imageData:Data = UIImage.pngData(image)()!
+        
+        let strBase64 = imageData.base64EncodedString(options: .lineLength64Characters)
+        print(strBase64)
     }
 }

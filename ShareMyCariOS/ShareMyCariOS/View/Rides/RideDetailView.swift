@@ -8,6 +8,7 @@
 import SwiftUI
 import MapKit
 import CoreLocation
+import EventKit
 
 struct Marker: Identifiable {
     let id = UUID()
@@ -27,6 +28,10 @@ struct RideDetailView: View {
     @State private var showUpdateRide : Bool = false
     
     @State private var isOwner : Bool = false
+    
+    @State private var showAlert : Bool = false
+    
+    let store = EKEventStore()
     
     var itemslong: [GridItem] {
         Array(repeating: .init(.adaptive(minimum: 120), alignment: .topLeading), count: 2)
@@ -129,6 +134,14 @@ struct RideDetailView: View {
             .sheet(isPresented: $showUpdateRide){
                 UpdateRideView(showPopUp: $showUpdateRide, ride: ride, refresh: startRideDetail)
             }
+            .navigationBarItems(trailing: Image("file-plus").onTapGesture(perform: {
+                showAlert = true
+            }))
+            .alert(isPresented: $showAlert){
+                Alert(title: Text("Agenda"), message: Text("Wil je deze rit in je agenda zetten?"), primaryButton: Alert.Button.default(Text("Nee")), secondaryButton: Alert.Button.default(Text("Ja"), action: {
+                    createEventinTheCalendar(with: ride.name, forDate: Date.fromDateString(input: ride.beginDateTime), toDate: Date.fromDateString(input: ride.endDateTime))
+                }))
+            }
     }
     
     func startRideDetail() async {
@@ -174,4 +187,32 @@ struct RideDetailView: View {
             print(error)
         }
     }
+    
+    func createEventinTheCalendar(with title:String, forDate eventStartDate:Date, toDate eventEndDate:Date) {
+            
+            store.requestAccess(to: .event) { (success, error) in
+                if  error == nil {
+                    let event = EKEvent.init(eventStore: self.store)
+                    event.title = title
+                    event.calendar = self.store.defaultCalendarForNewEvents // this will return deafult calendar from device calendars
+                    event.startDate = eventStartDate
+                    event.endDate = eventEndDate
+                    event.location = "\(ride.destination?.address ?? ""), \(ride.destination?.city ?? "")"
+                    event.notes = "Rit #\(ride.id) met de auto: \(ride.car?.name ?? "Auto niet gevonden") door gebruiker \(ride.user?.name ?? "Gebruiker niet gevonden")"
+                    let alarm = EKAlarm.init(absoluteDate: Date.init(timeInterval: -3600, since: event.startDate))
+                    event.addAlarm(alarm)
+                    
+                    do {
+                        try self.store.save(event, span: .thisEvent)
+                        //event created successfullt to default calendar
+                    } catch let error as NSError {
+                        print("failed to save event with error : \(error)")
+                    }
+
+                } else {
+                    //we have error in getting access to device calnedar
+                    print("error = \(String(describing: error?.localizedDescription))")
+                }
+            }
+        }
 }

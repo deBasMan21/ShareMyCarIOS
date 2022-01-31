@@ -27,7 +27,7 @@ struct LocationsView: View {
                 ScrollView{
                     ForEach(locations, id: \.self){ location in
                         NavigationLink(destination: LocationDetailView(location: location)){
-                            LocationView(location: location).padding()
+                            LocationView(pin: $region, location: location).padding()
                         }
                     }
                 }

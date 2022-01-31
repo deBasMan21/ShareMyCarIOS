@@ -57,6 +57,10 @@
 		EF518DB127A438000082CC0A /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = EF518DB027A438000082CC0A /* FirebaseAnalytics */; };
 		EF518DB327A438000082CC0A /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = EF518DB227A438000082CC0A /* FirebaseMessaging */; };
 		EF518DB527A438160082CC0A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF518DB427A438160082CC0A /* AppDelegate.swift */; };
+		EFAEFF0427A8430100A696AD /* KVKCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = EFAEFF0327A8430100A696AD /* KVKCalendar */; };
+		EFAEFF0627A8431A00A696AD /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAEFF0527A8431A00A696AD /* CalendarView.swift */; };
+		EFEE516127A859A800F82F52 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEE516027A859A800F82F52 /* ViewExtension.swift */; };
+		EFEE516527A86CB300F82F52 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEE516427A86CB300F82F52 /* ImagePicker.swift */; };
 		EFF62EA627A449A50082E8A7 /* LocationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF62EA527A449A50082E8A7 /* LocationsView.swift */; };
 		EFF62EA927A44E000082E8A7 /* LocationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF62EA827A44E000082E8A7 /* LocationDetailView.swift */; };
 		EFF62EAB27A450050082E8A7 /* LocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF62EAA27A450050082E8A7 /* LocationView.swift */; };
@@ -132,6 +136,9 @@
 		EF518DAD27A437840082CC0A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EF518DB427A438160082CC0A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EF518DB627A43A410082CC0A /* ShareMyCariOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ShareMyCariOS.entitlements; sourceTree = "<group>"; };
+		EFAEFF0527A8431A00A696AD /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		EFEE516027A859A800F82F52 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
+		EFEE516427A86CB300F82F52 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		EFF62EA527A449A50082E8A7 /* LocationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationsView.swift; sourceTree = "<group>"; };
 		EFF62EA827A44E000082E8A7 /* LocationDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailView.swift; sourceTree = "<group>"; };
 		EFF62EAA27A450050082E8A7 /* LocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationView.swift; sourceTree = "<group>"; };
@@ -144,6 +151,7 @@
 			files = (
 				EF518DB327A438000082CC0A /* FirebaseMessaging in Frameworks */,
 				EF518DB127A438000082CC0A /* FirebaseAnalytics in Frameworks */,
+				EFAEFF0427A8430100A696AD /* KVKCalendar in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,6 +338,8 @@
 			children = (
 				EF518D6727A2A6200082CC0A /* TextPresets.swift */,
 				EF518DAB27A41E4B0082CC0A /* LoadingView.swift */,
+				EFAEFF0527A8431A00A696AD /* CalendarView.swift */,
+				EFEE516427A86CB300F82F52 /* ImagePicker.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -392,6 +402,7 @@
 				EF518D9427A3F1C30082CC0A /* DateExtensions.swift */,
 				EF518DA627A4167E0082CC0A /* DataExtensions.swift */,
 				EF518DA927A416AD0082CC0A /* IntExtensions.swift */,
+				EFEE516027A859A800F82F52 /* ViewExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -428,6 +439,7 @@
 			packageProductDependencies = (
 				EF518DB027A438000082CC0A /* FirebaseAnalytics */,
 				EF518DB227A438000082CC0A /* FirebaseMessaging */,
+				EFAEFF0327A8430100A696AD /* KVKCalendar */,
 			);
 			productName = ShareMyCariOS;
 			productReference = EF518D1C27A29C180082CC0A /* ShareMyCariOS.app */;
@@ -503,6 +515,7 @@
 			mainGroup = EF518D1327A29C180082CC0A;
 			packageReferences = (
 				EF518DAF27A437FF0082CC0A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				EFAEFF0227A8430100A696AD /* XCRemoteSwiftPackageReference "KVKCalendar" */,
 			);
 			productRefGroup = EF518D1D27A29C180082CC0A /* Products */;
 			projectDirPath = "";
@@ -549,10 +562,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF518D6F27A2A8E30082CC0A /* User.swift in Sources */,
+				EFEE516527A86CB300F82F52 /* ImagePicker.swift in Sources */,
 				EF518DA727A4167E0082CC0A /* DataExtensions.swift in Sources */,
 				EF518D9C27A3F6F30082CC0A /* CreateLocationView.swift in Sources */,
 				EF518D4E27A29D890082CC0A /* MenuItem.swift in Sources */,
 				EF518DB527A438160082CC0A /* AppDelegate.swift in Sources */,
+				EFAEFF0627A8431A00A696AD /* CalendarView.swift in Sources */,
 				EF518D5A27A29FA70082CC0A /* SettingsView.swift in Sources */,
 				EF518D7B27A2D13C0082CC0A /* AddCarView.swift in Sources */,
 				EF518D2227A29C180082CC0A /* ContentView.swift in Sources */,
@@ -589,6 +604,7 @@
 				EF518D8927A311E90082CC0A /* RidesWrapper.swift in Sources */,
 				EF518D7127A2A91F0082CC0A /* Car.swift in Sources */,
 				EF518D2027A29C180082CC0A /* ShareMyCariOSApp.swift in Sources */,
+				EFEE516127A859A800F82F52 /* ViewExtension.swift in Sources */,
 				EFF62EA927A44E000082E8A7 /* LocationDetailView.swift in Sources */,
 				EF518D9727A3F3620082CC0A /* LocationService.swift in Sources */,
 				EF518DA027A412FB0082CC0A /* AuthenticationService.swift in Sources */,
@@ -756,6 +772,7 @@
 				DEVELOPMENT_TEAM = 963LK66N4P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "Wants acces to your calendar to create rides";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -787,6 +804,7 @@
 				DEVELOPMENT_TEAM = 963LK66N4P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCalendarsUsageDescription = "Wants acces to your calendar to create rides";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -952,6 +970,14 @@
 				kind = branch;
 			};
 		};
+		EFAEFF0227A8430100A696AD /* XCRemoteSwiftPackageReference "KVKCalendar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kvyatkovskys/KVKCalendar.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.5.8;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -964,6 +990,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = EF518DAF27A437FF0082CC0A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseMessaging;
+		};
+		EFAEFF0327A8430100A696AD /* KVKCalendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EFAEFF0227A8430100A696AD /* XCRemoteSwiftPackageReference "KVKCalendar" */;
+			productName = KVKCalendar;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

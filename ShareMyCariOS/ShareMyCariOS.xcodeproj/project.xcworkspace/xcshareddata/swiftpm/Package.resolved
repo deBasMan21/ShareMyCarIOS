@@ -74,6 +74,15 @@
         }
       },
       {
+        "package": "KVKCalendar",
+        "repositoryURL": "https://github.com/kvyatkovskys/KVKCalendar.git",
+        "state": {
+          "branch": null,
+          "revision": "c4728c93df4a52a4921b8825944128a2c8e08bd9",
+          "version": "0.5.8"
+        }
+      },
+      {
         "package": "leveldb",
         "repositoryURL": "https://github.com/firebase/leveldb.git",
         "state": {
