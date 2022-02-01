@@ -46,7 +46,6 @@ struct AddCarView: View {
                         Section(header: Text("Foto van de auto:")){
                             Text("Selecteer je foto").onTapGesture {
                                 showImagePicker = true
-                                convertImager()
                             }
                         }
                     } else {
@@ -59,7 +58,7 @@ struct AddCarView: View {
                         }
                     }
                 }.sheet(isPresented: $showImagePicker){
-                    PhotoPicker(image: $selectedImage)
+                    PhotoPicker(image: $selectedImage, onSucces: saveCar)
                 }
             }
             
@@ -69,6 +68,7 @@ struct AddCarView: View {
             }).foregroundColor(.blue), trailing: Button(newCar ? "Aanmaken" : "Toevoegen", action: {
                 Task{
                     if newCar {
+                        carImage = selectedImage.toString()
                         await createCar()
                     } else {
                         await addCarToUser()
@@ -78,8 +78,9 @@ struct AddCarView: View {
         }
     }
     
-    func saveImage(image : UIImage?) {
-        selectedImage = image!
+    func saveCar(image : UIImage) {
+        selectedImage = image
+        carImage = image.toString()
     }
     
     func createCar() async{
@@ -95,8 +96,6 @@ struct AddCarView: View {
     }
     
     func addCarToUser() async {
-        print(carId)
-        print(sharecode)
         do{
             let result = try await apiAddSharedCar(id: carId, shareCode: sharecode)
             if result != nil {
@@ -106,14 +105,5 @@ struct AddCarView: View {
         } catch let error {
             print(error)
         }
-    }
-    
-    func convertImager() {
-        let image : UIImage = UIImage(named:"tesla")!
-        //Now use image to create into NSData format
-        let imageData:Data = UIImage.pngData(image)()!
-        
-        let strBase64 = imageData.base64EncodedString(options: .lineLength64Characters)
-        print(strBase64)
     }
 }

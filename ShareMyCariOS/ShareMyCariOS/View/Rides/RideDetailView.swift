@@ -40,7 +40,10 @@ struct RideDetailView: View {
     var body: some View {
         VStack{
             ScrollView{
-                SubTitleText(text: "Rit #\(ride.id)")
+                Image("Navigation")
+                    .resizable()
+                    .frame(width: 35, height: 35, alignment: .center)
+                    .padding(.bottom, 20)
                 
                 LazyVGrid(columns: gridItems, alignment: .leading, spacing: 10){
                     Text("Naam:")
@@ -53,7 +56,12 @@ struct RideDetailView: View {
                     Text(ride.car?.name ?? "Not found")
                 }.padding(.horizontal)
                 
-                SubTitleText(text: "Gebruiker").padding(.top, 40)
+//                SubTitleText(text: "Gebruiker")
+                Image("User")
+                    .resizable()
+                    .frame(width: 35, height: 35, alignment: .center)
+                    .padding(.top, 40)
+                    .padding(.bottom, 20)
                 
                 LazyVGrid(columns: gridItems, alignment: .leading, spacing: 10){
                     Text("Naam:")
@@ -69,7 +77,11 @@ struct RideDetailView: View {
                 }.frame(width: 400, height: 300)
                     .padding(.vertical, 40)
                 
-                SubTitleText(text: "Locatie")
+//                SubTitleText(text: "Locatie")
+                Image("Location")
+                    .resizable()
+                    .frame(width: 35, height: 35, alignment: .center)
+                    .padding(.bottom, 20)
                 
                 LazyVGrid(columns: gridItems, alignment: .leading, spacing: 10){
                     Text("Locatie:")
@@ -82,7 +94,12 @@ struct RideDetailView: View {
                     Text(ride.destination?.city ?? "Not found")
                 }.padding(.horizontal)
                 
-                SubTitleText(text: "Overige details:").padding(.top, 40)
+//                SubTitleText(text: "Overige details:").padding(.top, 40)
+                Image("Info")
+                    .resizable()
+                    .frame(width: 35, height: 35, alignment: .center)
+                    .padding(.top, 40)
+                    .padding(.bottom, 20)
                 
                 LazyVGrid(columns: itemslong, alignment: .leading, spacing: 10){
                     Text("Aangemaakt op:")

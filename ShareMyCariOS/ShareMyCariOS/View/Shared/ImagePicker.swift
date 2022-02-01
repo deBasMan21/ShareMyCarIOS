@@ -4,9 +4,12 @@ import UIKit
 
 struct PhotoPicker: UIViewControllerRepresentable{
     @Binding var image : UIImage
+    @State var onSucces : (_ : UIImage) -> Void
     
     func makeUIViewController(context: Context) -> UIImagePickerController {
+        
         let picker = UIImagePickerController()
+        picker.delegate = context.coordinator
         picker.allowsEditing = true
         return picker
     }
@@ -16,6 +19,7 @@ struct PhotoPicker: UIViewControllerRepresentable{
     }
 
     func makeCoordinator() -> Coordinator {
+        
         return Coordinator(photoPicker: self)
     }
     
@@ -25,11 +29,14 @@ struct PhotoPicker: UIViewControllerRepresentable{
         
         init(photoPicker : PhotoPicker) {
             self.photoPicker = photoPicker
+            
         }
-        
-        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-            if let image = info[.editedImage] as? UIImage {
+
+        public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+            if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
                 photoPicker.image = image
+                photoPicker.onSucces(image)
+                picker.dismiss(animated: true, completion: nil)
             }
         }
     }

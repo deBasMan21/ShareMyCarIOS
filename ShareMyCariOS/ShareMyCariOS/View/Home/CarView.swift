@@ -12,7 +12,7 @@ struct CarView: View {
     
     var body: some View {
         VStack{
-            Image(car.image)
+            Image(uiImage: car.image.toImage())
                 .resizable()
                 .aspectRatio(contentMode: .fit)
             

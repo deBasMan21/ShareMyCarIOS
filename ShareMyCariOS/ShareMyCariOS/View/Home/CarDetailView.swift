@@ -24,7 +24,7 @@ struct CarDetailView: View {
     var body: some View {
             VStack{
                 ScrollView{
-                    Image(car.image)
+                    Image(uiImage: car.image.toImage())
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .padding()

@@ -24,7 +24,10 @@ struct LocationDetailView: View {
         VStack{
             ScrollView{
                 VStack {
-                    SubTitleText(text: "Locatie")
+                    Image("Location")
+                        .resizable()
+                        .frame(width: 35, height: 35, alignment: .center)
+                        .padding(.bottom, 20)
                     
                     LazyVGrid(columns: gridItems, alignment: .leading, spacing: 10){
                         Text("Locatie:")
