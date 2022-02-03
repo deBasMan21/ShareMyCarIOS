@@ -9,6 +9,7 @@ import SwiftUI
 
 struct GeneralPageLayout: View {
     @Binding var menu : MenuItem
+    @State var animationTest = false
     
     var body: some View {
         VStack{
@@ -31,28 +32,69 @@ struct GeneralPageLayout: View {
             HStack{
                 Spacer()
                 
-                Image("HomeIcon").onTapGesture {
-                    menu = .home
+                VStack{
+                    Image("HomeIcon").onTapGesture {
+                        withAnimation(.easeInOut){
+                            menu = .home
+                        }
+                    }
+                    
+                    if menu == .home{
+                        Divider()
+                            .frame(width: 50)
+                            .transition(.offset(x: 0, y: 50))
+                    }
                 }
                 
                 Spacer()
                 
-                Image("CalendarIcon").onTapGesture {
-                    menu = .rides
+                VStack{
+                    Image("CalendarIcon").onTapGesture {
+                        withAnimation(.easeInOut){
+                            menu = .rides
+                        }
+                    }
+                    
+                    if menu == .rides{
+                        Divider()
+                            .frame(width: 50)
+                            .transition(.offset(x: 0, y: 50))
+                    }
                 }
                 
                 Spacer()
                 
-                Image("MapIcon").onTapGesture {
-                    menu = .locations
+                VStack{
+                    Image("MapIcon").onTapGesture {
+                        withAnimation(.easeInOut){
+                            menu = .locations
+                        }
+                    }
+                    
+                    if menu == .locations{
+                        Divider()
+                            .frame(width: 50)
+                            .transition(.offset(x: 0, y: 50))
+                    }
                 }
                 
                 Spacer()
                 
-                Image("SettingsIcon").onTapGesture {
-                    menu = .settings
+
+                VStack{
+                    Image("SettingsIcon").onTapGesture {
+                        withAnimation(.easeInOut){
+                            menu = .settings
+                        }
+                    }
+                    
+                    if menu == .settings{
+                        Divider()
+                            .frame(width: 50)
+                            .transition(.offset(x: 0, y: 50))
+                    }
                 }
-                
+
                 Spacer()
             }.padding(20)
         }

@@ -26,3 +26,17 @@ func apiDeleteLocation(locationId : Int) async throws -> Location? {
     
     return data?.result
 }
+
+func apiUpdateLocation(location: Location) async throws -> Location? {
+    let json : [String : Any] = ["name": location.name, "address": location.address, "zipcode": location.zipCode, "city": location.city]
+    
+    let data = try await apiCall(url: "\(apiURL)/location/\(location.id)", body: json, method: "PUT", obj: LocationWrapper(result: Location(id: 1, address: "", zipCode: "", city: "", name: "")), authorized: true)
+    
+    return data?.result
+}
+
+func apiGetLocationById(id: Int) async throws -> Location? {
+    let data = try await apiCall(url: "\(apiURL)/location/\(id)", body: nil, method: "GET", obj: LocationWrapper(result: Location(id: 0, address: "", zipCode: "", city: "", name: "")), authorized: true)
+    
+    return data?.result
+}

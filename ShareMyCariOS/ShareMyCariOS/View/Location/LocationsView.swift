@@ -47,7 +47,7 @@ struct LocationsView: View {
                 }
             }).sheet(isPresented: $showAddLocation){
                 NavigationView{
-                    CreateLocationView().onDisappear(perform: {
+                    CreateLocationView(isNew: true).onDisappear(perform: {
                         showAddLocation = false
                     })
                 }

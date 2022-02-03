@@ -59,6 +59,7 @@
 		EF518DB527A438160082CC0A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF518DB427A438160082CC0A /* AppDelegate.swift */; };
 		EFAEFF0427A8430100A696AD /* KVKCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = EFAEFF0327A8430100A696AD /* KVKCalendar */; };
 		EFAEFF0627A8431A00A696AD /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAEFF0527A8431A00A696AD /* CalendarView.swift */; };
+		EFC6109827AC2DB200B4F0E6 /* UpdateUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC6109727AC2DB200B4F0E6 /* UpdateUserView.swift */; };
 		EFEE516127A859A800F82F52 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEE516027A859A800F82F52 /* ViewExtension.swift */; };
 		EFEE516527A86CB300F82F52 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEE516427A86CB300F82F52 /* ImagePicker.swift */; };
 		EFEE516727A9224300F82F52 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEE516627A9224300F82F52 /* UIImageExtension.swift */; };
@@ -138,6 +139,7 @@
 		EF518DB427A438160082CC0A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EF518DB627A43A410082CC0A /* ShareMyCariOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ShareMyCariOS.entitlements; sourceTree = "<group>"; };
 		EFAEFF0527A8431A00A696AD /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		EFC6109727AC2DB200B4F0E6 /* UpdateUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserView.swift; sourceTree = "<group>"; };
 		EFEE516027A859A800F82F52 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		EFEE516427A86CB300F82F52 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		EFEE516627A9224300F82F52 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
@@ -323,6 +325,7 @@
 			isa = PBXGroup;
 			children = (
 				EF518D5927A29FA70082CC0A /* SettingsView.swift */,
+				EFC6109727AC2DB200B4F0E6 /* UpdateUserView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -574,6 +577,7 @@
 				EF518D5A27A29FA70082CC0A /* SettingsView.swift in Sources */,
 				EF518D7B27A2D13C0082CC0A /* AddCarView.swift in Sources */,
 				EF518D2227A29C180082CC0A /* ContentView.swift in Sources */,
+				EFC6109827AC2DB200B4F0E6 /* UpdateUserView.swift in Sources */,
 				EF518D9127A323430082CC0A /* RideWrapper.swift in Sources */,
 				EF518DA227A4140A0082CC0A /* AuthenticationsWrappers.swift in Sources */,
 				EF518D5627A29F8D0082CC0A /* HomeView.swift in Sources */,

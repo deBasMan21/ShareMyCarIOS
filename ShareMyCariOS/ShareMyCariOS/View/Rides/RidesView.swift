@@ -12,7 +12,6 @@ import EventKit
 struct RidesView: View {
     @State var events: [Event] = []
     @State var size : CGRect = CGRect(x: 0, y: 0, width: 0, height: 0)
-    @State var colors : [Color] = [.blue, .red, .orange, .yellow, .green, .gray]
     
     var body: some View {
         GeometryReader { geometry in
@@ -43,9 +42,8 @@ struct RidesView: View {
     }
     
     func createEvents() async {
+        events = []
         do{
-            var index = 0
-            var colorPerson : [Int : Color] = [-1: .black]
             let result = try await apiGetUser()
             if result != nil{
                 var rides : [Ride] = []
@@ -57,29 +55,51 @@ struct RidesView: View {
                 }
                 
                 for ride in rides {
-                    var color : Color? = colorPerson[ride.user?.id ?? -1]
-                    if  color == nil {
-                        colorPerson[ride.user!.id] = colors[index]
-                        color = colors[index]
-                        index += 1
-                        if index > colors.count {
-                            index = 0
-                        }
-                    }
-                    
                     var event : Event = Event(ID: String(ride.id))
                     event.start = Date.fromDateString(input: ride.beginDateTime)
                     event.end = Date.fromDateString(input: ride.endDateTime)
                     event.text = "\(ride.name)\n\(ride.user?.name ?? "Not found")\n\(ride.car?.name ?? "Not found")\n\(ride.destination?.name ?? "Not found")"
-                    event.color = Event.Color(UIColor(color!))
-                    event.textForList = "blabla"
-                    event.textForMonth = "month"
+                    event.color = Event.Color(.gray)
                     events.append(event)
                 }
+                
+                let store = EKEventStore()
+
+                let calendars = store.calendars(for: .event)
+
+                for calendar in calendars {
+                    let oneMonthAgo = Date(timeIntervalSinceNow: -30*24*3600)
+                    let oneMonthAfter = Date(timeIntervalSinceNow: 30*24*3600)
+                    let predicate =  store.predicateForEvents(withStart: oneMonthAgo, end: oneMonthAfter, calendars: [calendar])
+                    
+                    let eventsFromCalendar = store.events(matching: predicate)
+                    let color = calendar.cgColor!
+                    
+                    for event in eventsFromCalendar {
+                        var newEvent : Event = Event(ID: event.eventIdentifier)
+                        newEvent.start = event.startDate
+                        newEvent.end = event.endDate
+                        
+                        var eventDescription : String = "\(event.title ?? "Not found")"
+                        if event.location != nil {
+                            eventDescription = eventDescription + "\n\(event.location!)"
+                        }
+                        if event.notes != nil {
+                            eventDescription = eventDescription + "\n\(event.notes!)"
+                        }
+                        
+                        newEvent.text = eventDescription
+                        newEvent.isAllDay = event.isAllDay
+                        newEvent.color = Event.Color(UIColor(cgColor: color))
+                        
+                        events.append(newEvent)
+                    }
+                    
+                }
             }
-            
         } catch let error{
             print(error)
         }
     }
+    
 }

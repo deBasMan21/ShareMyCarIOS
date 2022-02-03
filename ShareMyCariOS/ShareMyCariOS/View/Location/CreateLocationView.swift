@@ -9,8 +9,10 @@ import SwiftUI
 
 struct CreateLocationView: View {
     @Environment(\.presentationMode) var presentationMode
+    @State var isNew : Bool
     
-    @State private var location : Location = Location(id: 0, address: "", zipCode: "", city: "", name: "")
+    @State var location : Location = Location(id: 0, address: "", zipCode: "", city: "", name: "")
+    @State var refresh: (() async -> Void)?
     
     var body: some View {
         Form{
@@ -29,13 +31,17 @@ struct CreateLocationView: View {
             Section(header: Text("Stad:")){
                 TextField("Breda", text: $location.city)
             }
-        }.navigationTitle("Locatie aanmaken")
+        }.navigationTitle(isNew ? "Locatie aanmaken" : "Locatie bijwerken")
             .navigationBarItems(leading: Button("Annuleren", action: {
                 presentationMode.wrappedValue.dismiss()
             }).foregroundColor(.blue) ,trailing:
-                Button("Locatie maken", action: {
+                Button(isNew ? "Locatie aanmaken" : "Locatie bijwerken", action: {
                     Task{
-                        await createLocation()
+                        if isNew {
+                            await createLocation()
+                        } else {
+                            await updateLocation()
+                        }
                     }
                     presentationMode.wrappedValue.dismiss()
                 }).foregroundColor(isValidLocation() ? .blue : .accentColor)
@@ -46,6 +52,17 @@ struct CreateLocationView: View {
     func createLocation() async {
         do{
             _ = try await apiCreateLocation(location: location)
+        } catch let error {
+            print(error)
+        }
+    }
+    
+    func updateLocation() async {
+        do{
+            _ = try await apiUpdateLocation(location: location)
+            if refresh != nil {
+                await refresh!()
+            }
         } catch let error {
             print(error)
         }

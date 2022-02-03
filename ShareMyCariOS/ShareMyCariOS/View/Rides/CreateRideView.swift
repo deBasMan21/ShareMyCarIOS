@@ -46,7 +46,7 @@ struct CreateRideView: View {
                     .pickerStyle(.wheel)
                     .frame(height: 150, alignment: .center)
                     
-                    NavigationLink(destination: CreateLocationView()){
+                    NavigationLink(destination: CreateLocationView(isNew: true)){
                         Button("Locatie aanmaken", action: {
                             print("hi")
                         }).foregroundColor(.blue)

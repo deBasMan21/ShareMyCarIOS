@@ -15,3 +15,11 @@ func apiGetUser() async throws -> User? {
     
     return data?.result
 }
+
+func apiUpdateUser(user : User) async throws -> User? {
+    let json : [String: Any] = ["name":user.name, "email":user.email, "phoneNumber": user.phoneNumber]
+    
+    let data = try await apiCall(url: "\(apiURL)/user/\(user.id)", body: json, method: "PUT", obj: UserWrapper(result: User(id: 0, name: "", email: "", phoneNumber: "", cars: [])), authorized: true)
+    
+    return data?.result
+}

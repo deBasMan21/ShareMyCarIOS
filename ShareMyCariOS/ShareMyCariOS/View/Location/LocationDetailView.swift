@@ -81,6 +81,11 @@ struct LocationDetailView: View {
                 Spacer()
             }
         }.navigationTitle(location.name)
+            .sheet(isPresented: $showUpdateLocation){
+                NavigationView{
+                    CreateLocationView(isNew: false, location: location, refresh: refreshData)
+                }
+            }
     }
     
     func startLocationDetailView() async {
@@ -89,7 +94,7 @@ struct LocationDetailView: View {
             guard let location = location else {
                 return
             }
-            markers.append(Marker(location: MapMarker(coordinate: location, tint: .red)))
+            markers = [Marker(location: MapMarker(coordinate: location, tint: .red))]
             region = MKCoordinateRegion(center: location, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
         }
     }
@@ -110,6 +115,18 @@ struct LocationDetailView: View {
     func deleteLocation() async {
         do{
             _ = try await apiDeleteLocation(locationId : location.id)
+        } catch let error {
+            print(error)
+        }
+    }
+    
+    func refreshData() async {
+        do{
+            let result = try await apiGetLocationById(id: location.id)
+            if result != nil {
+                location = result!
+                await startLocationDetailView()
+            }
         } catch let error {
             print(error)
         }
