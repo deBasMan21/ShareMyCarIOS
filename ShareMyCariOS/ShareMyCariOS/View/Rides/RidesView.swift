@@ -12,6 +12,8 @@ import EventKit
 struct RidesView: View {
     @State var events: [Event] = []
     @State var size : CGRect = CGRect(x: 0, y: 0, width: 0, height: 0)
+    @Binding var user : User
+    @Binding var showLoader : Bool
     
     var body: some View {
         GeometryReader { geometry in
@@ -42,27 +44,27 @@ struct RidesView: View {
     }
     
     func createEvents() async {
+        showLoader = true
         events = []
         do{
-            let result = try await apiGetUser()
-            if result != nil{
-                var rides : [Ride] = []
-                for car in result!.cars! {
-                    let ridesresult = try await apiGetRidesForCar(carId: car.id)
-                    if ridesresult != nil{
-                        rides.append(contentsOf: ridesresult!)
-                    }
+            var rides : [Ride] = []
+            for car in user.cars! {
+                let ridesresult = try await apiGetRidesForCar(carId: car.id)
+                if ridesresult != nil{
+                    rides.append(contentsOf: ridesresult!)
                 }
-                
-                for ride in rides {
-                    var event : Event = Event(ID: String(ride.id))
-                    event.start = Date.fromDateString(input: ride.beginDateTime)
-                    event.end = Date.fromDateString(input: ride.endDateTime)
-                    event.text = "\(ride.name)\n\(ride.user?.name ?? "Not found")\n\(ride.car?.name ?? "Not found")\n\(ride.destination?.name ?? "Not found")"
-                    event.color = Event.Color(.gray)
-                    events.append(event)
-                }
-                
+            }
+            
+            for ride in rides {
+                var event : Event = Event(ID: String(ride.id))
+                event.start = Date.fromDateString(input: ride.beginDateTime)
+                event.end = Date.fromDateString(input: ride.endDateTime)
+                event.text = "\(ride.name)\n\(ride.user?.name ?? "Not found")\n\(ride.car?.name ?? "Not found")\n\(ride.destination?.name ?? "Not found")"
+                event.color = Event.Color(.gray)
+                events.append(event)
+            }
+            
+            if user.showEventsInCalendar {
                 let store = EKEventStore()
 
                 let calendars = store.calendars(for: .event)
@@ -94,12 +96,12 @@ struct RidesView: View {
                         
                         events.append(newEvent)
                     }
-                    
                 }
             }
         } catch let error{
             print(error)
         }
+        showLoader = false
     }
     
 }

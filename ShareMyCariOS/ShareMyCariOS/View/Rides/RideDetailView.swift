@@ -18,6 +18,7 @@ struct Marker: Identifiable {
 struct RideDetailView: View {
     @Environment(\.presentationMode) var presentationMode
     @State var ride : Ride
+    @Binding var showLoader : Bool
     
     @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 51.521417246551735, longitude: 4.4900756137931035), span: MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001))
     
@@ -149,7 +150,7 @@ struct RideDetailView: View {
                 }
             })
             .sheet(isPresented: $showUpdateRide){
-                UpdateRideView(showPopUp: $showUpdateRide, ride: ride, refresh: startRideDetail)
+                UpdateRideView(showPopUp: $showUpdateRide, ride: ride, refresh: startRideDetail, showLoader: $showLoader)
             }
             .navigationBarItems(trailing: Image("file-plus").onTapGesture(perform: {
                 showAlert = true
@@ -162,6 +163,7 @@ struct RideDetailView: View {
     }
     
     func startRideDetail() async {
+        showLoader = true
         do{
             let result = try await apiGetRide(rideId: ride.id)
             
@@ -182,6 +184,7 @@ struct RideDetailView: View {
         } catch let error {
             print(error)
         }
+        showLoader = false
     }
     
     func coordinates(forAddress address: String, completion: @escaping (CLLocationCoordinate2D?) -> Void) {
@@ -198,38 +201,40 @@ struct RideDetailView: View {
     }
     
     func deleteRide() async {
+        showLoader = true
         do{
             _ = try await apiDeleteRide(rideId: ride.id)
         } catch let error {
             print(error)
         }
+        showLoader = false
     }
     
     func createEventinTheCalendar(with title:String, forDate eventStartDate:Date, toDate eventEndDate:Date) {
-            
-            store.requestAccess(to: .event) { (success, error) in
-                if  error == nil {
-                    let event = EKEvent.init(eventStore: self.store)
-                    event.title = title
-                    event.calendar = self.store.defaultCalendarForNewEvents // this will return deafult calendar from device calendars
-                    event.startDate = eventStartDate
-                    event.endDate = eventEndDate
-                    event.location = "\(ride.destination?.address ?? ""), \(ride.destination?.city ?? "")"
-                    event.notes = "Rit #\(ride.id) met de auto: \(ride.car?.name ?? "Auto niet gevonden") door gebruiker \(ride.user?.name ?? "Gebruiker niet gevonden")"
-                    let alarm = EKAlarm.init(absoluteDate: Date.init(timeInterval: -3600, since: event.startDate))
-                    event.addAlarm(alarm)
-                    
-                    do {
-                        try self.store.save(event, span: .thisEvent)
-                        //event created successfullt to default calendar
-                    } catch let error as NSError {
-                        print("failed to save event with error : \(error)")
-                    }
-
-                } else {
-                    //we have error in getting access to device calnedar
-                    print("error = \(String(describing: error?.localizedDescription))")
+        store.requestAccess(to: .event) { (success, error) in
+            if  error == nil {
+                showLoader = true
+                let event = EKEvent.init(eventStore: self.store)
+                event.title = title
+                event.calendar = self.store.defaultCalendarForNewEvents // this will return deafult calendar from device calendars
+                event.startDate = eventStartDate
+                event.endDate = eventEndDate
+                event.location = "\(ride.destination?.address ?? ""), \(ride.destination?.city ?? "")"
+                event.notes = "Rit #\(ride.id) met de auto: \(ride.car?.name ?? "Auto niet gevonden") door gebruiker \(ride.user?.name ?? "Gebruiker niet gevonden")"
+                let alarm = EKAlarm.init(absoluteDate: Date.init(timeInterval: -3600, since: event.startDate))
+                event.addAlarm(alarm)
+                
+                do {
+                    try self.store.save(event, span: .thisEvent)
+                    //event created successfullt to default calendar
+                } catch let error as NSError {
+                    print("failed to save event with error : \(error)")
                 }
+                showLoader = false
+            } else {
+                //we have error in getting access to device calnedar
+                print("error = \(String(describing: error?.localizedDescription))")
             }
         }
+    }
 }

@@ -12,6 +12,7 @@ struct UpdateUserView: View {
     
     @State var user : User
     @State var refresh: (() async -> Void)?
+    @Binding var showLoader : Bool
     
     var body: some View {
         Form{
@@ -46,6 +47,7 @@ struct UpdateUserView: View {
     }
     
     func updateUser() async {
+        showLoader = true
         do{
             _ = try await apiUpdateUser(user: user)
             if refresh != nil {
@@ -54,5 +56,6 @@ struct UpdateUserView: View {
         } catch let error{
             print(error)
         }
+        showLoader = false
     }
 }

@@ -11,6 +11,7 @@ struct UpdateCarView: View {
     @Binding var showPopup : Bool
     @State var toMain : () -> Void
     @State var car : Car
+    @Binding var showLoader : Bool
     
     var body: some View {
         NavigationView{
@@ -43,12 +44,14 @@ struct UpdateCarView: View {
     }
     
     func updateCar() async {
+        showLoader = true
         do{
             _ = try await apiUpdateCar(id: car.id, name: car.name, plate: car.plate, image: car.image)
             showPopup = false
         }catch let error {
             print(error)
         }
+        showLoader = false
     }
 }
 

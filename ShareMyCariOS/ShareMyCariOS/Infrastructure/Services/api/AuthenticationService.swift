@@ -37,3 +37,9 @@ func apiRegister(email: String, password : String, name : String, phoneNumber : 
     
     return data?.result.user
 }
+
+func apiLogout() async throws -> User? {
+    let data = try await apiCall(url: "\(apiURL)/authentication/logout", body: nil, method: "DELETE", obj: UserWrapper(result: User(id: 1, name: "", email: "", phoneNumber: "", showEventsInCalendar: true, sendNotifications: true, profilePicture: "", cars: [])), authorized: true)
+    
+    return data?.result
+}

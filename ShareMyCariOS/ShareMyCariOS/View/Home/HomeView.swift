@@ -9,7 +9,8 @@ import SwiftUI
 
 struct HomeView: View {
     @Binding var menu : MenuItem
-    @State var user : User = User(id: 1, name: "", email: "", phoneNumber: "", cars: [])
+    @Binding var user : User
+    @Binding var showLoader : Bool
     
     @State var showAddCar : Bool = false
     
@@ -36,7 +37,7 @@ struct HomeView: View {
                 
                 ForEach(user.cars!, id: \.self) { car in
                     
-                    NavigationLink(destination: CarDetailView(navigation: $menu, car: car)){
+                    NavigationLink(destination: CarDetailView(navigation: $menu, showLoader: $showLoader, car: car)){
                         
                         CarView(car: car).padding()
                         
@@ -45,7 +46,7 @@ struct HomeView: View {
             }.navigationBarHidden(false)
                 .navigationBarTitle(Text("Home"))
                 .sheet(isPresented: $showAddCar, content: {
-                    AddCarView(showPopup: $showAddCar, refresh: startHomePage)
+                    AddCarView(showPopup: $showAddCar, refresh: startHomePage, showLoader : $showLoader)
                 })
         }.onAppear(perform: {
             Task{

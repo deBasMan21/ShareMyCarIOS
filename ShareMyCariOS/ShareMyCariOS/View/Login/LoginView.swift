@@ -15,7 +15,7 @@ struct LoginView: View {
     
     @State var showError : Bool = false
     
-    @State var showLoader : Bool = false
+    @State private var showLoader : Bool = false
     
     var body: some View {
         VStack{

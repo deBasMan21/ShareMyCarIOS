@@ -20,7 +20,7 @@ func apiAddSharedCar(id: String, shareCode : String) async throws -> User? {
     
     let userId = getUserIdFromChain()
     
-    let data = try await apiCall(url: "\(apiURL)/user/\(userId)/car/\(id)", body: json, method: "PUT", obj: UserWrapper(result: User(id: 1, name: "", email: "", phoneNumber: "", cars: [])), authorized: true)
+    let data = try await apiCall(url: "\(apiURL)/user/\(userId)/car/\(id)", body: json, method: "PUT", obj: UserWrapper(result: User(id: 1, name: "", email: "", phoneNumber: "", showEventsInCalendar: true, sendNotifications: true, profilePicture: "", cars: [])), authorized: true)
     
     return data?.result
 }
@@ -54,7 +54,7 @@ func apiUpdateCar(id: Int, name : String, plate : String, image : String) async 
 func apiRemoveCarFromUser(carId: Int) async throws -> User? {
     let userId = getUserIdFromChain()
     
-    let data = try await apiCall(url: "\(apiURL)/user/\(userId)/car/\(carId)", body: nil, method: "DELETE", obj: UserWrapper(result: User(id: 1, name: "", email: "", phoneNumber: "", cars: [])), authorized: true)
+    let data = try await apiCall(url: "\(apiURL)/user/\(userId)/car/\(carId)", body: nil, method: "DELETE", obj: UserWrapper(result: User(id: 1, name: "", email: "", phoneNumber: "", showEventsInCalendar: true, sendNotifications: true, profilePicture: "", cars: [])), authorized: true)
     
     return data?.result
 }

@@ -9,19 +9,20 @@ import SwiftUI
 
 struct GeneralPageLayout: View {
     @Binding var menu : MenuItem
-    @State var animationTest = false
+    @Binding var user : User
+    @Binding var showLoader : Bool
     
     var body: some View {
         VStack{
             NavigationView{
                 if menu == .home {
-                    HomeView(menu: $menu)
+                    HomeView(menu: $menu, user: $user, showLoader: $showLoader)
                 } else if menu == .rides {
-                    RidesView()
+                    RidesView(user: $user, showLoader : $showLoader)
                 } else if menu == .settings {
-                    SettingsView(menu : $menu)
+                    SettingsView(menu : $menu, user : $user, showLoader: $showLoader)
                 } else if menu == .locations {
-                    LocationsView()
+                    LocationsView(user: $user, showLoader : $showLoader)
                 }
                 
                 Spacer()

@@ -19,7 +19,7 @@ struct RegisterView: View {
     @State var showError : Bool = false
     @State var errorMessage : String = "Er is iets fout gegaan"
     
-    @State var showLoader : Bool = false
+    @State private var showLoader : Bool = false
     
     var body: some View {
         VStack{

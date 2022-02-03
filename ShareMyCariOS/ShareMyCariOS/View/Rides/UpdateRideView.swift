@@ -11,6 +11,7 @@ struct UpdateRideView: View {
     @Binding var showPopUp : Bool
     @State var ride : Ride
     @State var refresh : () async -> Void
+    @Binding var showLoader : Bool
     
     @State var locations : [Location] = []
     
@@ -46,7 +47,7 @@ struct UpdateRideView: View {
                     .pickerStyle(.wheel)
                     .frame(height: 150, alignment: .center)
                     
-                    NavigationLink(destination: CreateLocationView(isNew: true)){
+                    NavigationLink(destination: CreateLocationView(isNew: true, showLoader: $showLoader)){
                         Button("Locatie aanmaken", action: {
                             print("hi")
                         }).foregroundColor(.blue)
@@ -78,6 +79,7 @@ struct UpdateRideView: View {
     }
     
     func startUpdateRide() async {
+        showLoader = true
         name = ride.name
         locationId = ride.destination!.id
         beginDateTime = Date.fromDateString(input: ride.beginDateTime)
@@ -94,6 +96,7 @@ struct UpdateRideView: View {
         } catch let error {
             print(error)
         }
+        showLoader = false
     }
     
     func isValidRide() -> Bool {
@@ -101,6 +104,7 @@ struct UpdateRideView: View {
     }
     
     func createRide() async {
+        showLoader = true
         do{
             _ = try await apiUpdateRide(name: name, beginDateTime: beginDateTime, endDateTime: endDateTime, locationId: locationId, rideId: ride.id)
             await refresh()
@@ -108,5 +112,6 @@ struct UpdateRideView: View {
         }catch let error {
             print(error)
         }
+        showLoader = false
     }
 }

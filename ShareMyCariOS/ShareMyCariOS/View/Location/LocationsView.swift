@@ -11,6 +11,8 @@ import CoreLocation
 
 struct LocationsView: View {
     @State private var locations : [Location] = []
+    @Binding var user : User
+    @Binding var showLoader : Bool
     
     @State private var showAddLocation : Bool = false
     
@@ -26,7 +28,7 @@ struct LocationsView: View {
             } else {
                 ScrollView{
                     ForEach(locations, id: \.self){ location in
-                        NavigationLink(destination: LocationDetailView(location: location)){
+                        NavigationLink(destination: LocationDetailView(location: location, showLoader: $showLoader)){
                             LocationView(pin: $region, location: location).padding()
                         }
                     }
@@ -47,7 +49,7 @@ struct LocationsView: View {
                 }
             }).sheet(isPresented: $showAddLocation){
                 NavigationView{
-                    CreateLocationView(isNew: true).onDisappear(perform: {
+                    CreateLocationView(isNew: true, showLoader: $showLoader).onDisappear(perform: {
                         showAddLocation = false
                     })
                 }
@@ -55,6 +57,7 @@ struct LocationsView: View {
     }
     
     func startLocation() async {
+        showLoader = true
         do{
             let result = try await apiGetLocations()
             if result != nil {
@@ -73,6 +76,7 @@ struct LocationsView: View {
         } catch let error {
             print(error)
         }
+        showLoader = false
     }
     
     func coordinates(forAddress address: String, completion: @escaping (CLLocationCoordinate2D?) -> Void) {

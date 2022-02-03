@@ -12,5 +12,8 @@ struct User : Decodable, Identifiable, Hashable {
     var name : String
     var email : String
     var phoneNumber : String
+    var showEventsInCalendar : Bool
+    var sendNotifications : Bool
+    var profilePicture : String
     var cars : [Car]?
 }

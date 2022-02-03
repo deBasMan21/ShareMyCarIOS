@@ -12,6 +12,7 @@ import Foundation
 struct AddCarView: View {
     @Binding var showPopup : Bool
     var refresh : () async -> Void
+    @Binding var showLoader : Bool
     
     @State var carName : String = ""
     @State var carPlate : String = ""
@@ -84,6 +85,7 @@ struct AddCarView: View {
     }
     
     func createCar() async{
+        showLoader = true
         do{
             let result = try await apiCreateCar(name: carName, plate: carPlate, image: carImage)
             if result != nil {
@@ -93,9 +95,11 @@ struct AddCarView: View {
         } catch let error {
             print(error)
         }
+        showLoader = false
     }
     
     func addCarToUser() async {
+        showLoader = true
         do{
             let result = try await apiAddSharedCar(id: carId, shareCode: sharecode)
             if result != nil {
@@ -105,5 +109,6 @@ struct AddCarView: View {
         } catch let error {
             print(error)
         }
+        showLoader = false
     }
 }

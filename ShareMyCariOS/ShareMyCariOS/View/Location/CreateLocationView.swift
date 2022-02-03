@@ -13,6 +13,7 @@ struct CreateLocationView: View {
     
     @State var location : Location = Location(id: 0, address: "", zipCode: "", city: "", name: "")
     @State var refresh: (() async -> Void)?
+    @Binding var showLoader : Bool
     
     var body: some View {
         Form{
@@ -50,14 +51,17 @@ struct CreateLocationView: View {
     }
     
     func createLocation() async {
+        showLoader = true
         do{
             _ = try await apiCreateLocation(location: location)
         } catch let error {
             print(error)
         }
+        showLoader = false
     }
     
     func updateLocation() async {
+        showLoader = true
         do{
             _ = try await apiUpdateLocation(location: location)
             if refresh != nil {
@@ -66,6 +70,7 @@ struct CreateLocationView: View {
         } catch let error {
             print(error)
         }
+        showLoader = false
     }
     
     func isValidLocation() -> Bool {
