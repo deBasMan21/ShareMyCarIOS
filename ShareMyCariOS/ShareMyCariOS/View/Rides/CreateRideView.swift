@@ -9,16 +9,19 @@ import SwiftUI
 
 struct CreateRideView: View {
     @Binding var showPopUp : Bool
-    @State var car : Car
+    @State var car : Car?
     @Binding var showLoader : Bool
     @State var refresh : () async -> Void
+    @Binding var user : User
     
     @State var locations : [Location] = []
+    @State var cars : [Car] = []
     
     @State var name : String = ""
     @State var beginDateTime: Date = Date()
     @State var endDateTime: Date = Date()
     @State var locationId : Int = 0
+    @State var carId : Int = 0
     
     @State var showError : Bool = false
     @State var errorMessage : String = ""
@@ -26,6 +29,18 @@ struct CreateRideView: View {
     var body: some View {
         NavigationView{
             Form{
+                if car == nil {
+                    Section(header: Text("Auto:")) {
+                        Picker("Auto", selection: $carId) {
+                            ForEach(user.cars ?? [], id: \.self) { car in
+                                Text(car.name).tag(car.id)
+                            }
+                        }
+                        .pickerStyle(.wheel)
+                        .frame(height: 150, alignment: .center)
+                    }
+                }
+                
                 Section(header: Text("Ritnaam:")){
                     TextField("Naar school", text: $name)
                 }
@@ -80,6 +95,9 @@ struct CreateRideView: View {
     
     func startCreateRide() async {
         showLoader = true
+        if car != nil {
+            carId = car!.id
+        }
         do {
             let result = try await apiGetLocations()
             if result != nil {
@@ -92,6 +110,7 @@ struct CreateRideView: View {
             print(error)
         }
         showLoader = false
+        print(carId)
     }
     
     func isValidRide() -> Bool {
@@ -101,9 +120,11 @@ struct CreateRideView: View {
     func createRide() async {
         showLoader = true
         do{
-            _ = try await apiCreateRide(name: name, beginDateTime: beginDateTime, endDateTime: endDateTime, locationId: locationId, carId: car.id)
-            await refresh()
-            showPopUp = false
+            if carId != 0 {
+                _ = try await apiCreateRide(name: name, beginDateTime: beginDateTime, endDateTime: endDateTime, locationId: locationId, carId: carId)
+                await refresh()
+                showPopUp = false
+            }
         }catch let error {
             print(error)
         }

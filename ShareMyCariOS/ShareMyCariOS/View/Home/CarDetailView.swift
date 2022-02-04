@@ -14,6 +14,7 @@ struct CarDetailView: View {
     @Binding var showLoader : Bool
     
     @State var car : Car
+    @Binding var user : User
     @State var showShare: Bool = false
     @State var shareCode: String = "A K 1 D"
     
@@ -120,7 +121,7 @@ struct CarDetailView: View {
             }
             .sheet(isPresented: $showUpdateCar, content: {
                 if showCreateRide {
-                    CreateRideView(showPopUp: $showUpdateCar, car: car, showLoader: $showLoader, refresh: startCarDetail)
+                    CreateRideView(showPopUp: $showUpdateCar, car: car, showLoader: $showLoader, refresh: startCarDetail, user: $user)
                         .onDisappear(perform: {
                             showCreateRide = false
                         })

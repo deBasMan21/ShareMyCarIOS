@@ -14,33 +14,53 @@ struct RidesView: View {
     @State var size : CGRect = CGRect(x: 0, y: 0, width: 0, height: 0)
     @Binding var user : User
     @Binding var showLoader : Bool
+    @State var showNewRide : Bool = false
+    @State var showRideDetail : Bool = false
+    @State var lastRide : Ride = Ride(id: 0, name: "", beginDateTime: "", endDateTime: "", reservationDateTime: "", lastChangeDateTime: "")
     
     var body: some View {
         GeometryReader { geometry in
-            VStack{
-                if size.width > 0 {
-                    CalendarDisplayView(events: $events, size : size)
-                        .onAppear(perform: {
-                            Task {
-                                await createEvents()
-                            }
-                        })
-                } else{
-                    VStack{
-                        Spacer()
-                        HStack{
-                            Spacer()
-                            Text("HI").onAppear(perform: {
-                                size = CGRect(origin: CGPoint(x: 0, y: 0), size: geometry.size)
+            
+            
+            if showRideDetail {
+                NavigationLink(destination: RideDetailView(ride: lastRide, showLoader: $showLoader), isActive: $showRideDetail){
+                    Text("")
+                }
+            }else{
+                VStack{
+                    if size.width > 0 {
+                        CalendarDisplayView(events: $events, size : size, showDetail: $showRideDetail, ride: $lastRide)
+                            .onAppear(perform: {
+                                Task {
+                                    await createEvents()
+                                }
                             })
+                    } else{
+                        VStack{
+                            Spacer()
+                            HStack{
+                                Spacer()
+                                Text("Loading data...").onAppear(perform: {
+                                    size = CGRect(origin: CGPoint(x: 0, y: 0), size: geometry.size)
+                                })
+                                Spacer()
+                            }
                             Spacer()
                         }
-                        Spacer()
                     }
+                    
                 }
-                
             }
+            
         }.navigationTitle("Ritten")
+            .toolbar(content: {
+                Image("plus").onTapGesture {
+                    showNewRide = true
+                }
+            }).sheet(isPresented: $showNewRide){
+                CreateRideView(showPopUp: $showNewRide, car: nil, showLoader: $showLoader, refresh: createEvents, user: $user)
+            }
+            
     }
     
     func createEvents() async {
@@ -61,6 +81,7 @@ struct RidesView: View {
                 event.end = Date.fromDateString(input: ride.endDateTime)
                 event.text = "\(ride.name)\n\(ride.user?.name ?? "Not found")\n\(ride.car?.name ?? "Not found")\n\(ride.destination?.name ?? "Not found")"
                 event.color = Event.Color(.gray)
+                event.data = ride
                 events.append(event)
             }
             

@@ -11,6 +11,8 @@ import EventKit
 
 struct CalendarDisplayView: UIViewRepresentable {
     @Binding var events: [Event]
+    @Binding var showDetailPage: Bool
+    @Binding var lastRide : Ride
 
     private var calendar: CalendarView = CalendarView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 300))
         
@@ -27,17 +29,21 @@ struct CalendarDisplayView: UIViewRepresentable {
     }
     
     func makeCoordinator() -> CalendarDisplayView.Coordinator {
-        Coordinator(self)
+        Coordinator(self, showDetail: $showDetailPage, ride: $lastRide)
     }
     
-    public init(events: Binding<[Event]>, size : CGRect) {
+    public init(events: Binding<[Event]>, size : CGRect, showDetail: Binding<Bool>, ride : Binding<Ride>) {
         self._events = events
         calendar = CalendarView(frame: size)
+        _showDetailPage = showDetail
+        _lastRide = ride
     }
     
     // MARK: Calendar DataSource and Delegate
     class Coordinator: NSObject, CalendarDataSource, CalendarDelegate {
         private let view: CalendarDisplayView
+        @Binding var showDetail : Bool
+        @Binding var lastRide : Ride
         
         var events: [Event] = [] {
             didSet {
@@ -45,13 +51,23 @@ struct CalendarDisplayView: UIViewRepresentable {
             }
         }
         
-        init(_ view: CalendarDisplayView) {
+        init(_ view: CalendarDisplayView, showDetail : Binding<Bool>, ride : Binding<Ride>) {
             self.view = view
+            _showDetail = showDetail
+            _lastRide = ride
             super.init()
         }
         
         func eventsForCalendar(systemEvents: [EKEvent]) -> [Event] {
             return events
+        }
+        
+        func didSelectEvent(_ event: Event, type: CalendarType, frame: CGRect?) {
+            print(event)
+            if let data = event.data as? Ride {
+                lastRide = data
+                showDetail = true
+            }
         }
     }
     

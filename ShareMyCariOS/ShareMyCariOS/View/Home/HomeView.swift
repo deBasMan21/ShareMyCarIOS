@@ -37,7 +37,7 @@ struct HomeView: View {
                 
                 ForEach(user.cars!, id: \.self) { car in
                     
-                    NavigationLink(destination: CarDetailView(navigation: $menu, showLoader: $showLoader, car: car)){
+                    NavigationLink(destination: CarDetailView(navigation: $menu, showLoader: $showLoader, car: car, user: $user)){
                         
                         CarView(car: car).padding()
                         
