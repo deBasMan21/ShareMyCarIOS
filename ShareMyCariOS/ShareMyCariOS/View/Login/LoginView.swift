@@ -84,6 +84,7 @@ struct LoginView: View {
         if token != " " {
             authenticate()
         }
+        loader.hide()
     }
     
     func login() async {
@@ -130,5 +131,6 @@ struct LoginView: View {
         } else {
             menu = .home
         }
+        loader.hide()
     }
 }
