@@ -11,10 +11,11 @@ import SwiftUI
 struct ShareMyCariOSApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @State var menu : MenuItem = .login
+    @StateObject var loader : LoaderInfo = LoaderInfo()
     
     var body: some Scene {
         WindowGroup {
-            ContentView(menu: $menu)
+            ContentView(menu: $menu).environmentObject(loader)
         }
     }
 }

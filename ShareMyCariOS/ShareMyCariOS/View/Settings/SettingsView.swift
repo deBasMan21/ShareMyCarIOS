@@ -9,9 +9,9 @@ import SwiftUI
 
 struct SettingsView: View {
     @EnvironmentObject var iconSettings:IconNames
+    @EnvironmentObject var loader : LoaderInfo
     @Binding var menu : MenuItem
     @Binding var user : User
-    @Binding var showLoader : Bool
     
     @State private var gridItems = [GridItem(.fixed(150), alignment: .topLeading), GridItem(.fixed(200), alignment: .topLeading)]
     
@@ -145,7 +145,7 @@ struct SettingsView: View {
         }).navigationTitle("Instellingen")
             .sheet(isPresented: $showUpdateUser){
                 NavigationView{
-                    UpdateUserView(user: user, refresh: startSettings, showLoader: $showLoader)
+                    UpdateUserView(user: user, refresh: startSettings)
                 }
             }
     }
@@ -176,7 +176,7 @@ struct SettingsView: View {
     }
     
     func savePrefs() async {
-        showLoader = true
+        loader.show()
         do{
             let result = try await apiUpdateUser(user: user)
             if result != nil {
@@ -185,11 +185,11 @@ struct SettingsView: View {
         } catch let error{
             print(error)
         }
-        showLoader = false
+        loader.hide()
     }
     
     func logout() async {
-        showLoader = true
+        loader.show()
         do{
             _ = try await apiLogout()
             deleteAllTokens()
@@ -197,7 +197,7 @@ struct SettingsView: View {
         } catch let error {
             print(error)
         }
-        showLoader = false
+        loader.hide()
     }
 }
 

@@ -10,15 +10,15 @@ import UIKit
 import Foundation
 
 struct AddCarView: View {
+    @EnvironmentObject var loader : LoaderInfo
     @Binding var showPopup : Bool
     var refresh : () async -> Void
-    @Binding var showLoader : Bool
     
     @State var carName : String = ""
     @State var carPlate : String = ""
     @State var carImage : String = "tesla"
     
-    @State var newCar : Bool = true
+    @Binding var newCar : Bool
     @State var sharecode : String = ""
     @State var carId : String = ""
     
@@ -28,11 +28,6 @@ struct AddCarView: View {
         NavigationView{
             
             VStack{
-                Picker(selection: $newCar, label: Text("Auto maken of toevoegen")){
-                    Text("Nieuwe auto").tag(true)
-                    Text("Auto toevoegen").tag(false)
-                }.pickerStyle(.segmented)
-                    .padding()
                 
                 Form{
                     if newCar {
@@ -63,7 +58,7 @@ struct AddCarView: View {
                 }
             }
             
-            .navigationBarTitle("Auto toevoegen")
+            .navigationBarTitle(newCar ? "Auto aanmaken" : "Auto toevoegen")
             .navigationBarItems(leading: Button("Annuleren", action: {
                 showPopup = false
             }).foregroundColor(.blue), trailing: Button(newCar ? "Aanmaken" : "Toevoegen", action: {
@@ -85,7 +80,7 @@ struct AddCarView: View {
     }
     
     func createCar() async{
-        showLoader = true
+        loader.show()
         do{
             let result = try await apiCreateCar(name: carName, plate: carPlate, image: carImage)
             if result != nil {
@@ -95,11 +90,11 @@ struct AddCarView: View {
         } catch let error {
             print(error)
         }
-        showLoader = false
+        loader.hide()
     }
     
     func addCarToUser() async {
-        showLoader = true
+        loader.show()
         do{
             let result = try await apiAddSharedCar(id: carId, shareCode: sharecode)
             if result != nil {
@@ -109,6 +104,6 @@ struct AddCarView: View {
         } catch let error {
             print(error)
         }
-        showLoader = false
+        loader.hide()
     }
 }

@@ -9,11 +9,11 @@ import SwiftUI
 
 struct CreateLocationView: View {
     @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var loader : LoaderInfo
     @State var isNew : Bool
     
     @State var location : Location = Location(id: 0, address: "", zipCode: "", city: "", name: "")
     @State var refresh: (() async -> Void)?
-    @Binding var showLoader : Bool
     
     var body: some View {
         Form{
@@ -51,17 +51,17 @@ struct CreateLocationView: View {
     }
     
     func createLocation() async {
-        showLoader = true
+        loader.show()
         do{
             _ = try await apiCreateLocation(location: location)
         } catch let error {
             print(error)
         }
-        showLoader = false
+        loader.hide()
     }
     
     func updateLocation() async {
-        showLoader = true
+        loader.show()
         do{
             _ = try await apiUpdateLocation(location: location)
             if refresh != nil {
@@ -70,7 +70,7 @@ struct CreateLocationView: View {
         } catch let error {
             print(error)
         }
-        showLoader = false
+        loader.hide()
     }
     
     func isValidLocation() -> Bool {

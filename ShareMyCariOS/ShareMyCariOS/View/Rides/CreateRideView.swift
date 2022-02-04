@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct CreateRideView: View {
+    @EnvironmentObject var loader : LoaderInfo
     @Binding var showPopUp : Bool
     @State var car : Car?
-    @Binding var showLoader : Bool
     @State var refresh : () async -> Void
     @Binding var user : User
     
@@ -62,7 +62,7 @@ struct CreateRideView: View {
                     .pickerStyle(.wheel)
                     .frame(height: 150, alignment: .center)
                     
-                    NavigationLink(destination: CreateLocationView(isNew: true, showLoader: $showLoader)){
+                    NavigationLink(destination: CreateLocationView(isNew: true)){
                         Button("Locatie aanmaken", action: {
                             print("hi")
                         }).foregroundColor(.blue)
@@ -94,7 +94,7 @@ struct CreateRideView: View {
     }
     
     func startCreateRide() async {
-        showLoader = true
+        loader.show()
         if car != nil {
             carId = car!.id
         }
@@ -109,8 +109,7 @@ struct CreateRideView: View {
         } catch let error {
             print(error)
         }
-        showLoader = false
-        print(carId)
+        loader.hide()
     }
     
     func isValidRide() -> Bool {
@@ -118,7 +117,7 @@ struct CreateRideView: View {
     }
     
     func createRide() async {
-        showLoader = true
+        loader.show()
         do{
             if carId != 0 {
                 _ = try await apiCreateRide(name: name, beginDateTime: beginDateTime, endDateTime: endDateTime, locationId: locationId, carId: carId)
@@ -128,6 +127,6 @@ struct CreateRideView: View {
         }catch let error {
             print(error)
         }
-        showLoader = false
+        loader.hide()
     }
 }

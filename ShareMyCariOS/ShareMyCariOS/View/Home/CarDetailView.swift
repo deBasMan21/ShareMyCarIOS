@@ -9,9 +9,9 @@ import SwiftUI
 
 struct CarDetailView: View {
     @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var loader : LoaderInfo
     
     @Binding var navigation : MenuItem
-    @Binding var showLoader : Bool
     
     @State var car : Car
     @Binding var user : User
@@ -50,7 +50,7 @@ struct CarDetailView: View {
                     ScrollView(.horizontal){
                         HStack{
                             ForEach(rides, id: \.self){ ride in
-                                NavigationLink(destination: RideDetailView(ride: ride, showLoader: $showLoader)){
+                                NavigationLink(destination: RideDetailView(ride: ride)){
                                     RideView(ride: ride).padding([.leading, .bottom, .trailing])
                                 }
                             }
@@ -121,12 +121,12 @@ struct CarDetailView: View {
             }
             .sheet(isPresented: $showUpdateCar, content: {
                 if showCreateRide {
-                    CreateRideView(showPopUp: $showUpdateCar, car: car, showLoader: $showLoader, refresh: startCarDetail, user: $user)
+                    CreateRideView(showPopUp: $showUpdateCar, car: car, refresh: startCarDetail, user: $user)
                         .onDisappear(perform: {
                             showCreateRide = false
                         })
                 } else {
-                    UpdateCarView(showPopup: $showUpdateCar, toMain: backToHome, car: car, showLoader: $showLoader)
+                    UpdateCarView(showPopup: $showUpdateCar, toMain: backToHome, car: car)
                 }
             })
             .onAppear(perform: {
@@ -141,7 +141,7 @@ struct CarDetailView: View {
     }
     
     func shareCar() async {
-        showLoader = true
+        loader.show()
         do {
             let result = try await apiShareCar(id: car.id)
             if result != nil {
@@ -152,7 +152,7 @@ struct CarDetailView: View {
         } catch let error {
             print(error)
         }
-        showLoader = false
+        loader.hide()
     }
     
     func endShareCar() async {
@@ -164,23 +164,23 @@ struct CarDetailView: View {
     }
     
     func deleteCar() async {
-        showLoader = true
+        loader.show()
         do{
             _ = try await apiDeleteCar(id: car.id)
         } catch let error {
             print(error)
         }
-        showLoader = false
+        loader.hide()
     }
     
     func removeCar() async {
-        showLoader = true
+        loader.show()
         do{
             _ = try await apiRemoveCarFromUser(carId: car.id)
         } catch let error {
             print(error)
         }
-        showLoader = false
+        loader.hide()
     }
     
     func startCarDetail() async {

@@ -10,10 +10,10 @@ import KVKCalendar
 import EventKit
 
 struct RidesView: View {
+    @EnvironmentObject var loader : LoaderInfo
     @State var events: [Event] = []
     @State var size : CGRect = CGRect(x: 0, y: 0, width: 0, height: 0)
     @Binding var user : User
-    @Binding var showLoader : Bool
     @State var showNewRide : Bool = false
     @State var showRideDetail : Bool = false
     @State var lastRide : Ride = Ride(id: 0, name: "", beginDateTime: "", endDateTime: "", reservationDateTime: "", lastChangeDateTime: "")
@@ -23,7 +23,7 @@ struct RidesView: View {
             
             
             if showRideDetail {
-                NavigationLink(destination: RideDetailView(ride: lastRide, showLoader: $showLoader), isActive: $showRideDetail){
+                NavigationLink(destination: RideDetailView(ride: lastRide), isActive: $showRideDetail){
                     Text("")
                 }
             }else{
@@ -58,13 +58,13 @@ struct RidesView: View {
                     showNewRide = true
                 }
             }).sheet(isPresented: $showNewRide){
-                CreateRideView(showPopUp: $showNewRide, car: nil, showLoader: $showLoader, refresh: createEvents, user: $user)
+                CreateRideView(showPopUp: $showNewRide, car: nil, refresh: createEvents, user: $user)
             }
             
     }
     
     func createEvents() async {
-        showLoader = true
+        loader.show()
         events = []
         do{
             var rides : [Ride] = []
@@ -122,7 +122,7 @@ struct RidesView: View {
         } catch let error{
             print(error)
         }
-        showLoader = false
+        loader.hide()
     }
     
 }

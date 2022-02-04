@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct HomeView: View {
+    @EnvironmentObject var showLoaderEnv : LoaderInfo
     @Binding var menu : MenuItem
     @Binding var user : User
-    @Binding var showLoader : Bool
     
+    @State var newCar : Bool = true
     @State var showAddCar : Bool = false
     
     var body: some View {
@@ -28,16 +29,25 @@ struct HomeView: View {
                 
                 Spacer()
                 
-                Image("plus").onTapGesture {
-                    showAddCar = true
-                }
+                Menu(content: {
+                    Button("Auto aanmaken", action: {
+                        newCar = true
+                        showAddCar = true
+                    })
+                    Button("Auto toevoegen", action: {
+                        newCar = false
+                        showAddCar = true
+                    })
+                }, label: {
+                    Image("plus")
+                })
             }.padding()
             
             ScrollView{
                 
                 ForEach(user.cars!, id: \.self) { car in
                     
-                    NavigationLink(destination: CarDetailView(navigation: $menu, showLoader: $showLoader, car: car, user: $user)){
+                    NavigationLink(destination: CarDetailView(navigation: $menu, car: car, user: $user)){
                         
                         CarView(car: car).padding()
                         
@@ -46,7 +56,7 @@ struct HomeView: View {
             }.navigationBarHidden(false)
                 .navigationBarTitle(Text("Home"))
                 .sheet(isPresented: $showAddCar, content: {
-                    AddCarView(showPopup: $showAddCar, refresh: startHomePage, showLoader : $showLoader)
+                    AddCarView(showPopup: $showAddCar, refresh: startHomePage, newCar: $newCar)
                 })
         }.onAppear(perform: {
             Task{
@@ -56,6 +66,7 @@ struct HomeView: View {
     }
     
     func startHomePage() async {
+        showLoaderEnv.hide()
         do{
             let result = try await apiGetUser()
             

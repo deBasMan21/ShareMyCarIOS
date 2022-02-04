@@ -11,8 +11,8 @@ import CoreLocation
 
 struct LocationDetailView: View {
     @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var loader : LoaderInfo
     @State var location : Location
-    @Binding var showLoader : Bool
     
     @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 51.521417246551735, longitude: 4.4900756137931035), span: MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001))
     
@@ -84,13 +84,13 @@ struct LocationDetailView: View {
         }.navigationTitle(location.name)
             .sheet(isPresented: $showUpdateLocation){
                 NavigationView{
-                    CreateLocationView(isNew: false, location: location, refresh: refreshData, showLoader: $showLoader)
+                    CreateLocationView(isNew: false, location: location, refresh: refreshData)
                 }
             }
     }
     
     func startLocationDetailView() async {
-        showLoader = true
+        loader.show()
         coordinates(forAddress: "\(location.address), \(location.city)"){
             (location) in
             guard let location = location else {
@@ -99,7 +99,7 @@ struct LocationDetailView: View {
             markers = [Marker(location: MapMarker(coordinate: location, tint: .red))]
             region = MKCoordinateRegion(center: location, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
         }
-        showLoader = false
+        loader.hide()
     }
     
     func coordinates(forAddress address: String, completion: @escaping (CLLocationCoordinate2D?) -> Void) {
@@ -116,17 +116,17 @@ struct LocationDetailView: View {
     }
     
     func deleteLocation() async {
-        showLoader = true
+        loader.show()
         do{
             _ = try await apiDeleteLocation(locationId : location.id)
         } catch let error {
             print(error)
         }
-        showLoader = false
+        loader.hide()
     }
     
     func refreshData() async {
-        showLoader = true
+        loader.show()
         do{
             let result = try await apiGetLocationById(id: location.id)
             if result != nil {
@@ -136,6 +136,6 @@ struct LocationDetailView: View {
         } catch let error {
             print(error)
         }
-        showLoader = false
+        loader.hide()
     }
 }

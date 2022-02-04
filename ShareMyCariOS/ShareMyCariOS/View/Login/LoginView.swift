@@ -16,11 +16,11 @@ struct LoginView: View {
     
     @State var showError : Bool = false
     
-    @State private var showLoader : Bool = false
+    @EnvironmentObject var loader : LoaderInfo
     
     var body: some View {
         VStack{
-            LoadingView(isShowing: $showLoader){
+            LoadingView(){
                 VStack{
                     Spacer()
                     Image("logo")
@@ -88,7 +88,7 @@ struct LoginView: View {
     
     func login() async {
         do{
-            showLoader = true
+            loader.show()
             let result = try await apiLogin(email: email, password: password)
             if result != nil {
                 menu = .home
@@ -98,6 +98,7 @@ struct LoginView: View {
         } catch let error {
             print(error)
         }
+        loader.hide()
     }
     
     func authenticate() {
@@ -114,7 +115,7 @@ struct LoginView: View {
                 if success {
                     menu = .home
                 } else {
-                    showLoader = true
+                    loader.show()
                     Task{
                         do{
                             _ = try await apiLogout()
@@ -123,7 +124,7 @@ struct LoginView: View {
                             print(error)
                         }
                     }
-                    showLoader = false
+                    loader.hide()
                 }
             }
         } else {

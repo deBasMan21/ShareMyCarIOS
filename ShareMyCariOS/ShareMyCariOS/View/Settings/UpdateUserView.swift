@@ -9,19 +9,15 @@ import SwiftUI
 
 struct UpdateUserView: View {
     @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var loader : LoaderInfo
     
     @State var user : User
     @State var refresh: (() async -> Void)?
-    @Binding var showLoader : Bool
     
     var body: some View {
         Form{
             Section(header: Text("Naam:")){
                 TextField("John Doe", text: $user.name)
-            }
-            
-            Section(header: Text("Email:")){
-                TextField("John@Doe.nl", text: $user.email)
             }
             
             Section(header: Text("Telefoonnummer:")){
@@ -47,7 +43,7 @@ struct UpdateUserView: View {
     }
     
     func updateUser() async {
-        showLoader = true
+        loader.show()
         do{
             _ = try await apiUpdateUser(user: user)
             if refresh != nil {
@@ -56,6 +52,6 @@ struct UpdateUserView: View {
         } catch let error{
             print(error)
         }
-        showLoader = false
+        loader.hide()
     }
 }

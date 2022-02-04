@@ -19,11 +19,11 @@ struct RegisterView: View {
     @State var showError : Bool = false
     @State var errorMessage : String = "Er is iets fout gegaan"
     
-    @State private var showLoader : Bool = false
+    @EnvironmentObject var loader : LoaderInfo
     
     var body: some View {
         VStack{
-            LoadingView(isShowing: $showLoader){
+            LoadingView(){
                 ScrollView{
                     VStack{
                         Spacer()
@@ -139,7 +139,7 @@ struct RegisterView: View {
     }
     
     func register() async {
-        showLoader = true
+        loader.show()
         if isValid() {
             do{
                 let result = try await apiRegister(email: email, password: password, name: name, phoneNumber: phoneNumber)
@@ -156,6 +156,6 @@ struct RegisterView: View {
             errorMessage = "Registratie formulier niet geldig. Vul alles in en probeer het opnieuw!"
             showError = true
         }
-        showLoader = false
+        loader.hide()
     }
 }

@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct LoadingView<Content>: View where Content: View {
-    @Binding var isShowing: Bool
+    @EnvironmentObject var loader : LoaderInfo
+    
     var content: () -> Content
     
     var body: some View {
@@ -16,8 +17,8 @@ struct LoadingView<Content>: View where Content: View {
 
             VStack{
                 self.content()
-                    .disabled(self.isShowing)
-                    .blur(radius: self.isShowing ? 3 : 0)
+                    .disabled(loader.showLoader)
+                    .blur(radius: loader.showLoader ? 3 : 0)
             }
                 
 
@@ -29,7 +30,7 @@ struct LoadingView<Content>: View where Content: View {
             .background()
             .foregroundColor(Color.primary)
             .cornerRadius(20)
-            .opacity(self.isShowing ? 1 : 0)
+            .opacity(loader.showLoader ? 1 : 0)
 
         }.padding(.top, 0.1)
     }

@@ -17,11 +17,10 @@ struct Marker: Identifiable {
 
 struct RideDetailView: View {
     @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var loader : LoaderInfo
     @State var ride : Ride
-    @Binding var showLoader : Bool
     
     @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 51.521417246551735, longitude: 4.4900756137931035), span: MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001))
-    
     @State private var markers : [Marker] = []
     
     @State private var gridItems = [GridItem(.fixed(150), alignment: .topLeading), GridItem(.fixed(200), alignment: .topLeading)]
@@ -156,7 +155,7 @@ struct RideDetailView: View {
                 }
             })
             .sheet(isPresented: $showUpdateRide){
-                UpdateRideView(showPopUp: $showUpdateRide, ride: ride, refresh: startRideDetail, showLoader: $showLoader)
+                UpdateRideView(showPopUp: $showUpdateRide, ride: ride, refresh: startRideDetail)
             }
             .navigationBarItems(trailing: Image("file-plus").onTapGesture(perform: {
                 showAlert = true
@@ -169,7 +168,7 @@ struct RideDetailView: View {
     }
     
     func startRideDetail() async {
-        showLoader = true
+        loader.show()
         do{
             let result = try await apiGetRide(rideId: ride.id)
             
@@ -196,7 +195,7 @@ struct RideDetailView: View {
         } catch let error {
             print(error)
         }
-        showLoader = false
+        loader.hide()
     }
     
     func coordinates(forAddress address: String, completion: @escaping (CLLocationCoordinate2D?) -> Void) {
@@ -213,19 +212,19 @@ struct RideDetailView: View {
     }
     
     func deleteRide() async {
-        showLoader = true
+        loader.show()
         do{
             _ = try await apiDeleteRide(rideId: ride.id)
         } catch let error {
             print(error)
         }
-        showLoader = false
+        loader.hide()
     }
     
     func createEventinTheCalendar(with title:String, forDate eventStartDate:Date, toDate eventEndDate:Date) {
         store.requestAccess(to: .event) { (success, error) in
             if  error == nil {
-                showLoader = true
+                loader.show()
                 let event = EKEvent.init(eventStore: self.store)
                 event.title = title
                 event.calendar = self.store.defaultCalendarForNewEvents // this will return deafult calendar from device calendars
@@ -242,7 +241,7 @@ struct RideDetailView: View {
                 } catch let error as NSError {
                     print("failed to save event with error : \(error)")
                 }
-                showLoader = false
+                loader.hide()
             } else {
                 //we have error in getting access to device calnedar
                 print("error = \(String(describing: error?.localizedDescription))")

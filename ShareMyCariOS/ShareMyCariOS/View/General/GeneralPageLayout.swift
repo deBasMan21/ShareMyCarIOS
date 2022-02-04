@@ -10,20 +10,19 @@ import SwiftUI
 struct GeneralPageLayout: View {
     @Binding var menu : MenuItem
     @Binding var user : User
-    @Binding var showLoader : Bool
     @StateObject var IconSettings : IconNames = IconNames()
     
     var body: some View {
         VStack{
             NavigationView{
                 if menu == .home {
-                    HomeView(menu: $menu, user: $user, showLoader: $showLoader)
+                    HomeView(menu: $menu, user: $user)
                 } else if menu == .rides {
-                    RidesView(user: $user, showLoader : $showLoader)
+                    RidesView(user: $user)
                 } else if menu == .settings {
-                    SettingsView(menu : $menu, user : $user, showLoader: $showLoader)
+                    SettingsView(menu : $menu, user : $user)
                 } else if menu == .locations {
-                    LocationsView(user: $user, showLoader : $showLoader)
+                    LocationsView(user: $user)
                 }
                 
                 Spacer()

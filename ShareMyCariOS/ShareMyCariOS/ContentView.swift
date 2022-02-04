@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var loader : LoaderInfo
     @Binding var menu : MenuItem
     @State var user : User = User(id: 1, name: "", email: "", phoneNumber: "", showEventsInCalendar: true, sendNotifications: true, profilePicture: "", cars: [])
-    @State public var showLoader: Bool = false
     
     var body: some View {
         if menu == .login {
@@ -18,8 +18,8 @@ struct ContentView: View {
         } else if menu == .register {
             RegisterView(menu : $menu)
         } else {
-            LoadingView(isShowing: $showLoader){
-                GeneralPageLayout(menu: $menu, user: $user, showLoader: $showLoader).onAppear(perform: {
+            LoadingView(){
+                GeneralPageLayout(menu: $menu, user: $user).onAppear(perform: {
                     Task{
                         await startApplication()
                     }
@@ -31,7 +31,7 @@ struct ContentView: View {
     
     
     func startApplication() async {
-        showLoader = true
+        loader.show()
         do{
             let result = try await apiGetUser()
             
@@ -41,6 +41,6 @@ struct ContentView: View {
         } catch let error {
             print(error)
         }
-        showLoader = false
+        loader.hide()
     }
 }
