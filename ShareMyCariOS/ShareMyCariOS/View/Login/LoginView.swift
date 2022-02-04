@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import LocalAuthentication
 
 struct LoginView: View {
     @Binding var menu : MenuItem
@@ -81,7 +82,7 @@ struct LoginView: View {
     func startLogin() {
         let token : String = getTokenFromChain()
         if token != " " {
-            menu = .home
+            authenticate()
         }
     }
     
@@ -96,6 +97,37 @@ struct LoginView: View {
             }
         } catch let error {
             print(error)
+        }
+    }
+    
+    func authenticate() {
+        let context = LAContext()
+        var error: NSError?
+
+        // check whether biometric authentication is possible
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            // it's possible, so go ahead and use it
+            let reason = "We willen zeker weten dat jij het bent"
+
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
+                // authentication has now completed
+                if success {
+                    menu = .home
+                } else {
+                    showLoader = true
+                    Task{
+                        do{
+                            _ = try await apiLogout()
+                            deleteAllTokens()
+                        } catch let error {
+                            print(error)
+                        }
+                    }
+                    showLoader = false
+                }
+            }
+        } else {
+            menu = .home
         }
     }
 }

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @EnvironmentObject var iconSettings:IconNames
     @Binding var menu : MenuItem
     @Binding var user : User
     @Binding var showLoader : Bool
@@ -26,20 +27,22 @@ struct SettingsView: View {
         VStack{
             ScrollView{
                 VStack{
-                    Image(uiImage: currentImage)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 150, height: 150)
-                        .clipped()
-                        .clipShape(Circle())
-                        .overlay(Circle()
-                            .stroke(lineWidth: 2))
-                        .padding([.leading, .trailing, .top])
-                    
-                    Button("Foto aanpassen", action: {
-                        showImagePicker = true
-                    }).foregroundColor(.blue)
-                        .padding([.leading, .trailing, .bottom])
+                    VStack{
+                        Image(uiImage: currentImage)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 150, height: 150)
+                            .clipped()
+                            .clipShape(Circle())
+                            .overlay(Circle()
+                                .stroke(lineWidth: 2))
+                            .padding([.leading, .trailing, .top])
+                        
+                        Button("Foto aanpassen", action: {
+                            showImagePicker = true
+                        }).foregroundColor(.blue)
+                            .padding([.leading, .trailing, .bottom])
+                    }
                     
                     VStack{
                         LazyVGrid(columns: gridItems, alignment: .leading, spacing: 10){
@@ -50,35 +53,72 @@ struct SettingsView: View {
                             Text("Telefoonnummer:")
                             Text(user.phoneNumber)
                         }.padding(.horizontal)
+                        
+                        Button("Account aanpassen", action: {
+                            showUpdateUser = true
+                        }).foregroundColor(.blue)
+                            .padding([.leading, .trailing, .bottom])
                     }
                     
-                    Button("Account aanpassen", action: {
-                        showUpdateUser = true
-                    }).foregroundColor(.blue)
-                        .padding([.leading, .trailing, .bottom])
-                    
-                    Divider()
-                    
-                    
-                    Toggle("Push notifications", isOn: $user.sendNotifications)
-                        .padding()
-                        .onChange(of: user.sendNotifications){ value in
-                            Task{
-                                await savePrefs()
-                            }
-                        }
+                    VStack{
+                        Divider()
                         
-                    Divider()
-                    
-                    Toggle("Show personal events in calendar", isOn: $user.showEventsInCalendar)
-                        .padding()
-                        .onChange(of: user.showEventsInCalendar){ value in
-                            Task{
-                                await savePrefs()
+                        
+                        Toggle("Push notifications", isOn: $user.sendNotifications)
+                            .padding()
+                            .onChange(of: user.sendNotifications){ value in
+                                Task{
+                                    await savePrefs()
+                                }
                             }
-                        }
+                            
+                        Divider()
+                        
+                        Toggle("Show personal events in calendar", isOn: $user.showEventsInCalendar)
+                            .padding()
+                            .onChange(of: user.showEventsInCalendar){ value in
+                                Task{
+                                    await savePrefs()
+                                }
+                            }
+                    }
                     
-                    Divider()
+                    VStack{
+                        Divider()
+                        
+                        HStack{
+                            Text("AppIcon veranderen")
+                            
+                            Spacer()
+                            
+                            Picker(selection: $iconSettings.currentIndex,label:Text("Icons")){
+                                ForEach(0 ..< iconSettings.iconNames.count){i in
+                                    HStack(spacing:20){
+                                        Text(self.iconSettings.iconNames[i] ?? "light").padding()
+                                        Image(uiImage: UIImage(named: self.iconSettings.iconNames[i] ?? "AppIcon") ?? UIImage())
+                                            .resizable()
+                                            .renderingMode(.original)
+                                            .frame(width: 50, height: 50, alignment: .leading)
+                                    }
+                                }.onReceive([self.iconSettings.currentIndex].publisher.first()){ value in
+                                    let i = self.iconSettings.iconNames.firstIndex(of: UIApplication.shared.alternateIconName) ?? 0
+                                    if value != i{
+                                        UIApplication.shared.setAlternateIconName(self.iconSettings.iconNames[value], completionHandler: {
+                                            error in
+                                            if let error = error {
+                                                print(error.localizedDescription)
+                                            } else {
+                                                print("Success!")
+                                            }
+                                        })
+                                    }
+                                }
+                            }
+                        }.padding()
+                        
+                        Divider()
+                    }
+                    
                 }
             }
             

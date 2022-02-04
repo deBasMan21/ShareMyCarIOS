@@ -59,6 +59,10 @@
 		EF518DB527A438160082CC0A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF518DB427A438160082CC0A /* AppDelegate.swift */; };
 		EFAEFF0427A8430100A696AD /* KVKCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = EFAEFF0327A8430100A696AD /* KVKCalendar */; };
 		EFAEFF0627A8431A00A696AD /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAEFF0527A8431A00A696AD /* CalendarView.swift */; };
+		EFB0EC3B27AD23D0000F909C /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB0EC3A27AD23D0000F909C /* Icon.swift */; };
+		EFB0EC6B27AD2D0C000F909C /* dark@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EFB0EC5C27AD2D0B000F909C /* dark@2x.png */; };
+		EFB0EC6E27AD2D0C000F909C /* dark@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = EFB0EC5F27AD2D0B000F909C /* dark@3x.png */; };
+		EFB0EC7027AD2D0C000F909C /* dark@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = EFB0EC6127AD2D0B000F909C /* dark@1x.png */; };
 		EFC6109827AC2DB200B4F0E6 /* UpdateUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC6109727AC2DB200B4F0E6 /* UpdateUserView.swift */; };
 		EFEE516127A859A800F82F52 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEE516027A859A800F82F52 /* ViewExtension.swift */; };
 		EFEE516527A86CB300F82F52 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEE516427A86CB300F82F52 /* ImagePicker.swift */; };
@@ -139,6 +143,11 @@
 		EF518DB427A438160082CC0A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EF518DB627A43A410082CC0A /* ShareMyCariOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ShareMyCariOS.entitlements; sourceTree = "<group>"; };
 		EFAEFF0527A8431A00A696AD /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		EFB0EC3727AD21DE000F909C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		EFB0EC3A27AD23D0000F909C /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
+		EFB0EC5C27AD2D0B000F909C /* dark@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "dark@2x.png"; path = "../../../../../Desktop/iOS/AppIcon.appiconset/dark@2x.png"; sourceTree = "<group>"; };
+		EFB0EC5F27AD2D0B000F909C /* dark@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "dark@3x.png"; path = "../../../../../Desktop/iOS/AppIcon.appiconset/dark@3x.png"; sourceTree = "<group>"; };
+		EFB0EC6127AD2D0B000F909C /* dark@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "dark@1x.png"; path = "../../../../../Desktop/iOS/AppIcon.appiconset/dark@1x.png"; sourceTree = "<group>"; };
 		EFC6109727AC2DB200B4F0E6 /* UpdateUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserView.swift; sourceTree = "<group>"; };
 		EFEE516027A859A800F82F52 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		EFEE516427A86CB300F82F52 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
@@ -199,6 +208,8 @@
 		EF518D1E27A29C180082CC0A /* ShareMyCariOS */ = {
 			isa = PBXGroup;
 			children = (
+				EFB0EC3827AD2253000F909C /* Icons */,
+				EFB0EC3727AD21DE000F909C /* Info.plist */,
 				EF518DB627A43A410082CC0A /* ShareMyCariOS.entitlements */,
 				EF518DAD27A437840082CC0A /* GoogleService-Info.plist */,
 				EF518D6927A2A7850082CC0A /* Domain */,
@@ -275,6 +286,7 @@
 		EF518D4C27A29D710082CC0A /* Logic */ = {
 			isa = PBXGroup;
 			children = (
+				EFB0EC3927AD23C7000F909C /* Icons */,
 				EF518DA827A416810082CC0A /* Extensions */,
 				EF518D4927A29D580082CC0A /* Navigation */,
 			);
@@ -413,6 +425,24 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		EFB0EC3827AD2253000F909C /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				EFB0EC6127AD2D0B000F909C /* dark@1x.png */,
+				EFB0EC5C27AD2D0B000F909C /* dark@2x.png */,
+				EFB0EC5F27AD2D0B000F909C /* dark@3x.png */,
+			);
+			path = Icons;
+			sourceTree = "<group>";
+		};
+		EFB0EC3927AD23C7000F909C /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				EFB0EC3A27AD23D0000F909C /* Icon.swift */,
+			);
+			path = Icons;
+			sourceTree = "<group>";
+		};
 		EFF62EA727A44AAF0082E8A7 /* api */ = {
 			isa = PBXGroup;
 			children = (
@@ -539,6 +569,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EFB0EC6B27AD2D0C000F909C /* dark@2x.png in Resources */,
+				EFB0EC6E27AD2D0C000F909C /* dark@3x.png in Resources */,
+				EFB0EC7027AD2D0C000F909C /* dark@1x.png in Resources */,
 				EF518D2727A29C1C0082CC0A /* Preview Assets.xcassets in Resources */,
 				EF518DAE27A437840082CC0A /* GoogleService-Info.plist in Resources */,
 				EF518D5027A29DF90082CC0A /* .gitignore in Resources */,
@@ -595,6 +628,7 @@
 				EF518D8527A2FD0C0082CC0A /* UpdateCarView.swift in Sources */,
 				EF518D5827A29F9D0082CC0A /* RidesView.swift in Sources */,
 				EF518D6027A2A0440082CC0A /* RegisterView.swift in Sources */,
+				EFB0EC3B27AD23D0000F909C /* Icon.swift in Sources */,
 				EF518D5227A29F780082CC0A /* LoginView.swift in Sources */,
 				EFF62EA627A449A50082E8A7 /* LocationsView.swift in Sources */,
 				EF518D7327A2AE3A0082CC0A /* CarView.swift in Sources */,
@@ -780,7 +814,9 @@
 				DEVELOPMENT_TEAM = 963LK66N4P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ShareMyCariOS/Info.plist;
 				INFOPLIST_KEY_NSCalendarsUsageDescription = "Wants acces to your calendar to create rides";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "We willen zeker weten dat jij het bent";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -812,7 +848,9 @@
 				DEVELOPMENT_TEAM = 963LK66N4P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ShareMyCariOS/Info.plist;
 				INFOPLIST_KEY_NSCalendarsUsageDescription = "Wants acces to your calendar to create rides";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "We willen zeker weten dat jij het bent";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

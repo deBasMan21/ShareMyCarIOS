@@ -11,6 +11,7 @@ struct GeneralPageLayout: View {
     @Binding var menu : MenuItem
     @Binding var user : User
     @Binding var showLoader : Bool
+    @StateObject var IconSettings : IconNames = IconNames()
     
     var body: some View {
         VStack{
@@ -98,6 +99,6 @@ struct GeneralPageLayout: View {
 
                 Spacer()
             }.padding(20)
-        }
+        }.environmentObject(IconNames())
     }
 }

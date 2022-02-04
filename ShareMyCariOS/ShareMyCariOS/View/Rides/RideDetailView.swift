@@ -31,6 +31,7 @@ struct RideDetailView: View {
     @State private var isOwner : Bool = false
     
     @State private var showAlert : Bool = false
+    @State private var userImage : UIImage = UIImage(named: "User")!
     
     let store = EKEventStore()
     
@@ -57,10 +58,15 @@ struct RideDetailView: View {
                     Text(ride.car?.name ?? "Not found")
                 }.padding(.horizontal)
                 
-//                SubTitleText(text: "Gebruiker")
-                Image("User")
+                
+                Image(uiImage: userImage)
                     .resizable()
-                    .frame(width: 35, height: 35, alignment: .center)
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 50, height: 50)
+                    .clipped()
+                    .clipShape(Circle())
+                    .overlay(Circle()
+                        .stroke(lineWidth: 2))
                     .padding(.top, 40)
                     .padding(.bottom, 20)
                 
@@ -169,6 +175,12 @@ struct RideDetailView: View {
             
             if result != nil {
                 ride = result!
+                
+                if ride.user != nil{
+                    if !ride.user!.profilePicture.isEmpty {
+                        userImage = ride.user!.profilePicture.toImage()
+                    }
+                }
                 
                 isOwner = ride.user?.id == getUserIdFromChain()
 

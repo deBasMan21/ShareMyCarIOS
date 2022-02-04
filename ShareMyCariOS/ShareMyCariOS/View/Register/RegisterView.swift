@@ -139,9 +139,9 @@ struct RegisterView: View {
     }
     
     func register() async {
+        showLoader = true
         if isValid() {
             do{
-                showLoader = true
                 let result = try await apiRegister(email: email, password: password, name: name, phoneNumber: phoneNumber)
                 if result != nil {
                     menu = .home
@@ -156,5 +156,6 @@ struct RegisterView: View {
             errorMessage = "Registratie formulier niet geldig. Vul alles in en probeer het opnieuw!"
             showError = true
         }
+        showLoader = false
     }
 }
