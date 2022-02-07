@@ -6,15 +6,25 @@
 //
 
 import Foundation
+import SwiftUI
 
 class LoaderInfo: ObservableObject {
     @Published var showLoader = true
     
     func show() {
-        showLoader = true
+        Task{
+            await MainActor.run{
+                showLoader = true
+            }
+        }
+        
     }
     
     func hide() {
-        showLoader = false
+        Task{
+            await MainActor.run{
+                showLoader = false
+            }
+        }
     }
 }

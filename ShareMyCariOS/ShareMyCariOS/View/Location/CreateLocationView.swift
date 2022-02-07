@@ -44,7 +44,7 @@ struct CreateLocationView: View {
                             await updateLocation()
                         }
                     }
-                    presentationMode.wrappedValue.dismiss()
+                    
                 }).foregroundColor(isValidLocation() ? .blue : .accentColor)
                         .disabled(!isValidLocation())
             )
@@ -54,6 +54,9 @@ struct CreateLocationView: View {
         loader.show()
         do{
             _ = try await apiCreateLocation(location: location)
+            await MainActor.run{
+                presentationMode.wrappedValue.dismiss()
+            }
         } catch let error {
             print(error)
         }
@@ -66,6 +69,9 @@ struct CreateLocationView: View {
             _ = try await apiUpdateLocation(location: location)
             if refresh != nil {
                 await refresh!()
+                await MainActor.run{
+                    presentationMode.wrappedValue.dismiss()
+                }
             }
         } catch let error {
             print(error)

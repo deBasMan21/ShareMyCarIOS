@@ -22,9 +22,8 @@ struct CreateRideView: View {
     @State var endDateTime: Date = Date()
     @State var locationId : Int = 0
     @State var carId : Int = 0
-    
-    @State var showError : Bool = false
-    @State var errorMessage : String = ""
+
+    @State var showConfirm : Bool = false
     
     var body: some View {
         NavigationView{
@@ -55,6 +54,7 @@ struct CreateRideView: View {
                 
                 Section(header: Text("Bestemming:")) {
                     Picker("Bestemming", selection: $locationId) {
+                        Text("Geen locatie").tag(0)
                         ForEach(locations, id: \.self) { location in
                             Text(location.name).tag(location.id)
                         }
@@ -67,6 +67,14 @@ struct CreateRideView: View {
                             print("hi")
                         }).foregroundColor(.blue)
                     }
+                }.alert(isPresented: $showConfirm){
+                    Alert(title: Text("Bevestig"), message: Text("Weet je zeker dat je een rit wil maken zonder locatie? Als je wel een locatie hebt geselecteerd probeer deze dan opnieuw te selecteren."), primaryButton: Alert.Button.default(Text("Annuleren").foregroundColor(.red), action: {
+                        showConfirm = false
+                    }), secondaryButton: Alert.Button.cancel(Text("Oke"), action:{
+                        Task{
+                            await createRide()
+                        }
+                    }))
                 }
 
             }.navigationBarTitle("Rit aanmaken")
@@ -77,9 +85,7 @@ struct CreateRideView: View {
                         }).foregroundColor(.blue),
                     trailing:
                         Button("Rit maken", action: {
-                            Task{
-                                await createRide()
-                            }
+                            confirmRide()
                         }).foregroundColor(isValidRide() ? .blue : .accentColor)
                             .disabled(!isValidRide())
                     )
@@ -87,9 +93,7 @@ struct CreateRideView: View {
                 Task{
                     await startCreateRide()
                 }
-            }).alert(isPresented: $showError){
-                Alert(title: Text("Oeps..."), message: Text(errorMessage), dismissButton: Alert.Button.cancel(Text("Oke")))
-            }
+            })
         }
     }
     
@@ -102,9 +106,6 @@ struct CreateRideView: View {
             let result = try await apiGetLocations()
             if result != nil {
                 locations = result!
-            } else {
-                errorMessage = "Je hebt nog geen locaties. Maak er een aan om deze rit te kunnen maken."
-                showError = true
             }
         } catch let error {
             print(error)
@@ -113,17 +114,25 @@ struct CreateRideView: View {
     }
     
     func isValidRide() -> Bool {
-        return !name.isEmpty && beginDateTime > Date.now && endDateTime > beginDateTime && locationId != 0
+        return !name.isEmpty && beginDateTime > Date.now && endDateTime > beginDateTime
+    }
+    
+    func confirmRide(){
+        if locationId == 0 {
+            showConfirm = true
+        } else {
+            Task{
+                await createRide()
+            }
+        }
     }
     
     func createRide() async {
         loader.show()
         do{
-            if carId != 0 {
-                _ = try await apiCreateRide(name: name, beginDateTime: beginDateTime, endDateTime: endDateTime, locationId: locationId, carId: carId)
-                await refresh()
-                showPopUp = false
-            }
+            _ = try await apiCreateRide(name: name, beginDateTime: beginDateTime, endDateTime: endDateTime, locationId: locationId, carId: carId)
+            await refresh()
+            showPopUp = false
         }catch let error {
             print(error)
         }

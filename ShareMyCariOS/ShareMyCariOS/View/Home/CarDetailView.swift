@@ -5,7 +5,9 @@
 //  Created by Bas Buijsen on 27/01/2022.
 //
 
+
 import SwiftUI
+
 
 struct CarDetailView: View {
     @Environment(\.presentationMode) var presentationMode
@@ -22,6 +24,8 @@ struct CarDetailView: View {
     @State var showCreateRide : Bool = false
     
     @State var rides : [Ride] = []
+    
+
     
     var body: some View {
             VStack{
@@ -58,10 +62,10 @@ struct CarDetailView: View {
                     }
                     
                 }
-                
-                
 
-                Spacer()
+                Spacer().sheet(isPresented: $showShare) {
+                    ShareCarView(carId: car.id, showShare: $showShare)
+                }
                 
                 if car.isOwner {
                     HStack{
@@ -107,24 +111,13 @@ struct CarDetailView: View {
         }.navigationTitle(car.name)
             .navigationBarItems(trailing: Button("Delen", action: {
                 if car.isOwner {
-                    Task{
-                        await shareCar()
-                    }
+                    showShare = true
                 }
             }).opacity(car.isOwner ? 100: 0))
-            .alert(isPresented: $showShare){
-                Alert(title: Text(shareCode), message: Text("Vul deze code in met het id \(car.id) bij degene met wie je de auto wil delen en als de auto is toegevoegd kan je op klaar klikken."), dismissButton: Alert.Button.default(Text("Klaar"), action: {
-                    Task{
-                        await endShareCar()
-                    }
-                }))
-            }
+
             .sheet(isPresented: $showUpdateCar, content: {
                 if showCreateRide {
                     CreateRideView(showPopUp: $showUpdateCar, car: car, refresh: startCarDetail, user: $user)
-                        .onDisappear(perform: {
-                            showCreateRide = false
-                        })
                 } else {
                     UpdateCarView(showPopup: $showUpdateCar, toMain: backToHome, car: car)
                 }
@@ -138,29 +131,6 @@ struct CarDetailView: View {
     
     func backToHome() {
         presentationMode.wrappedValue.dismiss()
-    }
-    
-    func shareCar() async {
-        loader.show()
-        do {
-            let result = try await apiShareCar(id: car.id)
-            if result != nil {
-                
-                shareCode = result!
-                showShare = true
-            }
-        } catch let error {
-            print(error)
-        }
-        loader.hide()
-    }
-    
-    func endShareCar() async {
-        do {
-            _ = try await apiEndShareCar(id: car.id)
-        } catch let error {
-            print(error)
-        }
     }
     
     func deleteCar() async {

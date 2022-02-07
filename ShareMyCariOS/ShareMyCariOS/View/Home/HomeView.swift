@@ -6,14 +6,16 @@
 //
 
 import SwiftUI
+import CodeScanner
 
 struct HomeView: View {
     @EnvironmentObject var showLoaderEnv : LoaderInfo
     @Binding var menu : MenuItem
     @Binding var user : User
     
-    @State var newCar : Bool = true
+    @State var showNewCar : Bool = false
     @State var showAddCar : Bool = false
+    @State var isNewCar : Bool = false
     
     var body: some View {
         VStack{
@@ -30,18 +32,22 @@ struct HomeView: View {
                 Spacer()
                 
                 Menu(content: {
-                    Button("Auto aanmaken", action: {
-                        newCar = true
+                    Button("Auto maken", action: {
+                        showNewCar = true
+                        isNewCar = true
+                    })
+                    Button("Auto QR-code scannen", action: {
                         showAddCar = true
                     })
-                    Button("Auto toevoegen", action: {
-                        newCar = false
-                        showAddCar = true
+                    Button("Auto handmatig delen", action: {
+                        showNewCar = true
+                        isNewCar = false
                     })
                 }, label: {
                     Image("plus")
                 })
             }.padding()
+                
             
             ScrollView{
                 
@@ -55,14 +61,17 @@ struct HomeView: View {
                 }
             }.navigationBarHidden(false)
                 .navigationBarTitle(Text("Home"))
-                .sheet(isPresented: $showAddCar, content: {
-                    AddCarView(showPopup: $showAddCar, refresh: startHomePage, newCar: $newCar)
+                .sheet(isPresented: $showNewCar, content: {
+                    AddCarView(showPopup: $showNewCar, refresh: startHomePage, newCar: $isNewCar)
                 })
         }.onAppear(perform: {
             Task{
                 await startHomePage()
             }
         }).navigationTitle("Home")
+            .sheet(isPresented: $showAddCar){
+                CodeScannerView(codeTypes: [.qr], simulatedData: "ABCD\n0", completion: handleScan).navigationTitle("Scan qr code")
+            }
     }
     
     func startHomePage() async {
@@ -76,5 +85,37 @@ struct HomeView: View {
         } catch let error {
             print(error)
         }
+    }
+    
+    func handleScan(result: Result<ScanResult, ScanError>){
+        switch result {
+        case .success(let result):
+            Task{
+                print(result)
+                let details = result.string.components(separatedBy: "\n")
+                guard details.count == 2 else {return}
+                await addCarToUser(sharecode: details[0], carId: details[1])
+                await MainActor.run{
+                    showAddCar = false
+                }
+            }
+            
+        case .failure(let error):
+            print(error)
+        }
+
+    }
+    
+    func addCarToUser(sharecode : String, carId : String) async {
+        showLoaderEnv.show()
+        do{
+            let result = try await apiAddSharedCar(id: carId, shareCode: sharecode)
+            if result != nil {
+                await startHomePage()
+            }
+        } catch let error {
+            print(error)
+        }
+        showLoaderEnv.hide()
     }
 }

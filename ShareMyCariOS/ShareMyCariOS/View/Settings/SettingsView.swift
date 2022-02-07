@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import EventKit
 
 struct SettingsView: View {
     @EnvironmentObject var iconSettings:IconNames
@@ -15,13 +16,12 @@ struct SettingsView: View {
     
     @State private var gridItems = [GridItem(.fixed(150), alignment: .topLeading), GridItem(.fixed(200), alignment: .topLeading)]
     
-    @State var userNotifications : Bool = true
-    @State var userCalendarEvents : Bool = true
-    
     @State var showImagePicker : Bool = false
     @State var showUpdateUser : Bool = false
     
     @State var currentImage : UIImage = UIImage(named: "User")!
+    
+    let store = EKEventStore()
     
     var body: some View {
         VStack{
@@ -78,7 +78,9 @@ struct SettingsView: View {
                             .padding()
                             .onChange(of: user.showEventsInCalendar){ value in
                                 Task{
-                                    await savePrefs()
+                                    if requestPermission(){
+                                        await savePrefs()
+                                    }
                                 }
                             }
                     }
@@ -198,6 +200,22 @@ struct SettingsView: View {
             print(error)
         }
         loader.hide()
+    }
+    
+    func requestPermission() -> Bool {
+        var result = false
+        store.requestAccess(to: .event) { (success, error) in
+            if error != nil {
+                user.showEventsInCalendar = false
+            } else {
+                if success {
+                    result = true
+                } else {
+                    user.showEventsInCalendar = false
+                }
+            }
+        }
+        return result
     }
 }
 

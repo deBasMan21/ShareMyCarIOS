@@ -32,6 +32,8 @@ struct RideDetailView: View {
     @State private var showAlert : Bool = false
     @State private var userImage : UIImage = UIImage(named: "User")!
     
+    @State var showMap = false
+    
     let store = EKEventStore()
     
     var itemslong: [GridItem] {
@@ -78,29 +80,29 @@ struct RideDetailView: View {
                     Text(ride.user?.phoneNumber ?? "Not found")
                 }.padding(.horizontal)
                 
-                Map(coordinateRegion: $region, showsUserLocation: true, annotationItems: markers){ marker in
-                    marker.location
-                }.frame(width: 400, height: 300)
-                    .padding(.vertical, 40)
-                
-//                SubTitleText(text: "Locatie")
-                Image("Location")
-                    .resizable()
-                    .frame(width: 35, height: 35, alignment: .center)
-                    .padding(.bottom, 20)
-                
-                LazyVGrid(columns: gridItems, alignment: .leading, spacing: 10){
-                    Text("Locatie:")
-                    Text(ride.destination?.name ?? "No destination name")
-                    Text("Adres:")
-                    Text(ride.destination?.address ?? "Not found")
-                    Text("Postcode:")
-                    Text(ride.destination?.zipCode ?? "Not found")
-                    Text("Stad:")
-                    Text(ride.destination?.city ?? "Not found")
-                }.padding(.horizontal)
-                
-//                SubTitleText(text: "Overige details:").padding(.top, 40)
+                if showMap {
+                    Map(coordinateRegion: $region, showsUserLocation: true, annotationItems: markers){ marker in
+                        marker.location
+                    }.frame(width: 400, height: 300)
+                        .padding(.vertical, 40)
+                    
+                    Image("Location")
+                        .resizable()
+                        .frame(width: 35, height: 35, alignment: .center)
+                        .padding(.bottom, 20)
+                    
+                    LazyVGrid(columns: gridItems, alignment: .leading, spacing: 10){
+                        Text("Locatie:")
+                        Text(ride.destination?.name ?? "No destination name")
+                        Text("Adres:")
+                        Text(ride.destination?.address ?? "Not found")
+                        Text("Postcode:")
+                        Text(ride.destination?.zipCode ?? "Not found")
+                        Text("Stad:")
+                        Text(ride.destination?.city ?? "Not found")
+                    }.padding(.horizontal)
+                }
+
                 Image("Info")
                     .resizable()
                     .frame(width: 35, height: 35, alignment: .center)
@@ -157,9 +159,10 @@ struct RideDetailView: View {
             .sheet(isPresented: $showUpdateRide){
                 UpdateRideView(showPopUp: $showUpdateRide, ride: ride, refresh: startRideDetail)
             }
-            .navigationBarItems(trailing: Image("file-plus").onTapGesture(perform: {
-                showAlert = true
-            }))
+            .navigationBarItems(trailing: Image("file-plus")
+                .onTapGesture(perform: {
+                    showAlert = true
+                }))
             .alert(isPresented: $showAlert){
                 Alert(title: Text("Agenda"), message: Text("Wil je deze rit in je agenda zetten?"), primaryButton: Alert.Button.default(Text("Nee")), secondaryButton: Alert.Button.default(Text("Ja"), action: {
                     createEventinTheCalendar(with: ride.name, forDate: Date.fromDateString(input: ride.beginDateTime), toDate: Date.fromDateString(input: ride.endDateTime))
@@ -182,14 +185,20 @@ struct RideDetailView: View {
                 }
                 
                 isOwner = ride.user?.id == getUserIdFromChain()
-
-                coordinates(forAddress: "\(ride.destination!.address), \(ride.destination!.city)"){
-                    (location) in
-                    guard let location = location else {
-                        return
+                
+                if ride.destination != nil {
+                    coordinates(forAddress: "\(ride.destination!.address), \(ride.destination!.city)"){
+                        (location) in
+                        guard let location = location else {
+                            return
+                        }
+                        markers.append(Marker(location: MapMarker(coordinate: location, tint: .red)))
+                        region = MKCoordinateRegion(center: location, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
                     }
-                    markers.append(Marker(location: MapMarker(coordinate: location, tint: .red)))
-                    region = MKCoordinateRegion(center: location, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
+                    
+                    showMap = true
+                } else {
+                    showMap = false
                 }
             }
         } catch let error {
