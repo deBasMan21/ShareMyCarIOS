@@ -16,29 +16,18 @@ struct LocationsView: View {
     
     @State private var showAddLocation : Bool = false
     
-    @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 51.95016535, longitude: 6.28259561753436), span: MKCoordinateSpan(latitudeDelta: 3, longitudeDelta: 3))
+    @State private var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 52.2, longitude: 5.5), span: MKCoordinateSpan(latitudeDelta: 3, longitudeDelta: 3))
     
-    @State private var markers : [Marker] = []
+    @State private var markers : [Place] = []
     
     var body: some View {
         VStack{
-            if locations.count == 0 {
-                Text("Je hebt nog geen ritten. Maak er een aan door bovenaan op het plusje te drukken.")
-                    .multilineTextAlignment(.center)
-            } else {
-                ScrollView{
-                    ForEach(locations, id: \.self){ location in
-                        NavigationLink(destination: LocationDetailView(location: location)){
-                            LocationView(pin: $region, location: location).padding()
-                        }
+            Map(coordinateRegion: $region, annotationItems: markers){ marker in
+                MapAnnotation(coordinate: marker.coordinate){
+                    NavigationLink(destination: LocationDetailView(location: marker.loc)){
+                        PlaceAnnotationView(marker: marker)
                     }
                 }
-                
-                Spacer()
-                
-                Map(coordinateRegion: $region, showsUserLocation: true, annotationItems: markers){ marker in
-                    marker.location
-                }.frame(width: 400, height: 250)
             }
         }.navigationBarTitle("Locatie's")
             .navigationBarItems(trailing: Image("plus").onTapGesture {
@@ -63,13 +52,13 @@ struct LocationsView: View {
             if result != nil {
                 locations = result!
                 
-                locations.forEach{ location in
-                    coordinates(forAddress: "\(location.address), \(location.city)"){
+                locations.forEach{ loc in
+                    coordinates(forAddress: "\(loc.address), \(loc.city)"){
                         (location) in
                         guard let location = location else {
                             return
                         }
-                        markers.append(Marker(location: MapMarker(coordinate: location, tint: .red)))
+                        markers.append(Place(loc: loc, coordinate: location))
                     }
                 }
             }
@@ -91,4 +80,38 @@ struct LocationsView: View {
             completion(placemarks?.first?.location?.coordinate)
         }
     }
+}
+
+struct PlaceAnnotationView: View {
+    @State var marker : Place
+    
+    var body: some View {
+        VStack(spacing: 0) {
+          Image(systemName: "mappin.circle.fill")
+            .font(.title)
+            .foregroundColor(.red)
+          
+          Image(systemName: "arrowtriangle.down.fill")
+            .font(.caption)
+            .foregroundColor(.red)
+            .offset(x: 0, y: -5)
+            
+            Text(marker.loc.name)
+                .padding(.horizontal, 10)
+                .background(
+                    Text(marker.loc.name)
+                        .padding(.horizontal, 10)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 20)
+                                .colorInvert()
+                        )
+                )
+        }
+    }
+}
+
+struct Place: Identifiable {
+  let id = UUID()
+  var loc: Location
+  var coordinate: CLLocationCoordinate2D
 }

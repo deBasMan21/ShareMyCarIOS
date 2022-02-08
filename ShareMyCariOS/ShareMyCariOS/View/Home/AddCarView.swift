@@ -70,8 +70,18 @@ struct AddCarView: View {
                         await addCarToUser()
                     }
                 }
-            }).foregroundColor(.blue))
+            }).foregroundColor(newCar ? (isValid() ? .blue : .gray) : (isValidShare() ? .blue : .gray))
+                                    .disabled(newCar ? isValid() : isValidShare())
+            )
         }
+    }
+    
+    func isValid() -> Bool {
+        return !carName.isEmpty && !carPlate.isEmpty
+    }
+    
+    func isValidShare() -> Bool {
+        return !sharecode.isEmpty && !carId.isEmpty
     }
     
     func saveCar(image : UIImage) {

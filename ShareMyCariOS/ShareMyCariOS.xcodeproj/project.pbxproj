@@ -827,6 +827,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ShareMyCariOS/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ShareMyCar;
 				INFOPLIST_KEY_NSCalendarsUsageDescription = "Wants acces to your calendar to create rides";
 				INFOPLIST_KEY_NSCameraUsageDescription = "We want to scan a qr code";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "We willen zeker weten dat jij het bent";
@@ -862,6 +863,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ShareMyCariOS/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ShareMyCar;
 				INFOPLIST_KEY_NSCalendarsUsageDescription = "Wants acces to your calendar to create rides";
 				INFOPLIST_KEY_NSCameraUsageDescription = "We want to scan a qr code";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "We willen zeker weten dat jij het bent";

@@ -13,6 +13,9 @@ struct UpdateCarView: View {
     @State var toMain : () -> Void
     @State var car : Car
     
+    @State var selectedImage = UIImage(named: "tesla")!
+    @State var showImagePicker : Bool = false
+    
     var body: some View {
         NavigationView{
             Form{
@@ -25,33 +28,47 @@ struct UpdateCarView: View {
                 }
                 
                 Section(header: Text("Foto van de auto:")){
-                    TextField("tesla", text: $car.image)
+                    Text("Selecteer je foto").onTapGesture {
+                        showImagePicker = true
+                    }
                 }
 
             }
-        
-            
             .navigationBarTitle("Auto aanpassen")
             .navigationBarItems(leading: Button("Annuleren", action: {
                 showPopup = false
             }).foregroundColor(.blue), trailing: Button("Aanpassen", action: {
-                Task{
-                    await updateCar()
-                }
-                toMain()
-            }).foregroundColor(.blue))
+                updateCar(image: car.image.toImage())
+            }).foregroundColor(isValid() ? .blue : .gray)
+                .disabled(!isValid())
+            )
+            .sheet(isPresented: $showImagePicker){
+                PhotoPicker(image: $selectedImage, onSucces: updateCar)
+            }
         }
     }
     
-    func updateCar() async {
-        loader.show()
-        do{
-            _ = try await apiUpdateCar(id: car.id, name: car.name, plate: car.plate, image: car.image)
-            showPopup = false
-        }catch let error {
-            print(error)
+    func isValid() -> Bool {
+        return !car.name.isEmpty && !car.plate.isEmpty
+    }
+    
+    func updateCar(image : UIImage) {
+        Task{
+            await MainActor.run{
+                loader.show()
+            }
+            do{
+                _ = try await apiUpdateCar(id: car.id, name: car.name, plate: car.plate, image: image.toString())
+                showPopup = false
+            }catch let error {
+                print(error)
+            }
+            await MainActor.run{
+                loader.hide()
+                toMain()
+            }
         }
-        loader.hide()
+
     }
 }
 
