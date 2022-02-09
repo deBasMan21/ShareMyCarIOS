@@ -51,6 +51,8 @@ extension Date {
             date = dateFormatter.date(from: input)
         }
         
+        date?.addTimeInterval(60 * 60)
+        
         return date ?? Date()
     }
 }

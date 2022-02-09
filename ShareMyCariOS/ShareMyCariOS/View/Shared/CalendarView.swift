@@ -34,7 +34,9 @@ struct CalendarDisplayView: UIViewRepresentable {
     
     public init(events: Binding<[Event]>, size : CGRect, showDetail: Binding<Bool>, ride : Binding<Ride>) {
         self._events = events
-        calendar = CalendarView(frame: size)
+        var style : Style = Style()
+        style.followInSystemTheme = true
+        calendar = CalendarView(frame: size, style: style)
         _showDetailPage = showDetail
         _lastRide = ride
     }

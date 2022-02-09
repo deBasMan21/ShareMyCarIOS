@@ -7,7 +7,7 @@
 
 import Foundation
 
-public let apiURL: String = "https://sharemycarapi.azurewebsites.net/api"
+public let apiURL: String = "https://serverbuijsen.nl/api"
 
 
 func apiGetUser() async throws -> User? {

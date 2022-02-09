@@ -8,6 +8,7 @@
 import SwiftUI
 import MapKit
 import CoreLocation
+import CoreLocationUI
 
 struct LocationsView: View {
     @EnvironmentObject var loader : LoaderInfo
@@ -21,13 +22,20 @@ struct LocationsView: View {
     @State private var markers : [Place] = []
     
     var body: some View {
-        VStack{
-            Map(coordinateRegion: $region, annotationItems: markers){ marker in
+        ZStack{
+            Map(coordinateRegion: $region, showsUserLocation: true, annotationItems: markers){ marker in
                 MapAnnotation(coordinate: marker.coordinate){
                     NavigationLink(destination: LocationDetailView(location: marker.loc)){
                         PlaceAnnotationView(marker: marker)
                     }
                 }
+            }
+            
+            VStack{
+                Spacer()
+                
+                LocationButton{
+                }.padding(.bottom, 20)
             }
         }.navigationBarTitle("Locatie's")
             .navigationBarItems(trailing: Image("plus").onTapGesture {
@@ -46,7 +54,6 @@ struct LocationsView: View {
     }
     
     func startLocation() async {
-        loader.show()
         do{
             let result = try await apiGetLocations()
             if result != nil {

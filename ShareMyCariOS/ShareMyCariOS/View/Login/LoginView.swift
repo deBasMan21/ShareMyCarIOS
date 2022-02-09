@@ -131,6 +131,5 @@ struct LoginView: View {
         } else {
             menu = .home
         }
-        loader.hide()
     }
 }

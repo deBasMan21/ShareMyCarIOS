@@ -12,7 +12,7 @@ import SwiftUI
 extension UIImage {
     func toString() -> String {
         let image = imageWithoutBaseline()
-        return image.jpegData(compressionQuality: 0.5)?.base64EncodedString() ?? ""
+        return image.jpegData(compressionQuality: 0.1)?.base64EncodedString() ?? ""
     }
 }
 

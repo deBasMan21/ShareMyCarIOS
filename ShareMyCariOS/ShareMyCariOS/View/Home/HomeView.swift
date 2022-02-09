@@ -75,7 +75,6 @@ struct HomeView: View {
     }
     
     func startHomePage() async {
-        showLoaderEnv.hide()
         do{
             let result = try await apiGetUser()
             
@@ -85,6 +84,7 @@ struct HomeView: View {
         } catch let error {
             print(error)
         }
+        showLoaderEnv.hide()
     }
     
     func handleScan(result: Result<ScanResult, ScanError>){

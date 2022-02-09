@@ -49,7 +49,7 @@ struct CreateRideView: View {
                 }
                 
                 Section(header: Text("Eind moment:")){
-                    DatePicker("Eind moment", selection: $endDateTime, in: Date.now...)
+                    DatePicker("Eind moment", selection: $endDateTime, in: beginDateTime...)
                 }
                 
                 Section(header: Text("Bestemming:")) {
