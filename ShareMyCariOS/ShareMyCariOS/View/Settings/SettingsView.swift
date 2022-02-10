@@ -18,6 +18,8 @@ struct SettingsView: View {
     
     @State var showImagePicker : Bool = false
     @State var showUpdateUser : Bool = false
+    @State var showUpdatePassword : Bool = false
+    @AppStorage("showEventsInCalendar") private var showEventsIncalendar = false
     
     @State var currentImage : UIImage = UIImage(named: "User")!
     
@@ -58,6 +60,11 @@ struct SettingsView: View {
                             showUpdateUser = true
                         }).foregroundColor(.blue)
                             .padding([.leading, .trailing, .bottom])
+                        
+                        Button("Wachtwoord aanpassen", action: {
+                            showUpdatePassword = true
+                        }).foregroundColor(.blue)
+                            .padding([.leading, .trailing, .bottom])
                     }
                     
                     VStack{
@@ -74,16 +81,8 @@ struct SettingsView: View {
                             
                         Divider()
                         
-                        Toggle("Show personal events in calendar", isOn: $user.showEventsInCalendar)
+                        Toggle("Show personal events in calendar", isOn: $showEventsIncalendar)
                             .padding()
-                            .onChange(of: user.showEventsInCalendar){ value in
-                                Task{
-                                    if requestPermission(){
-                                        await savePrefs()
-                                    }
-                                }
-                            }
-                    }
                     
                     VStack{
                         Divider()
@@ -119,6 +118,9 @@ struct SettingsView: View {
                         }.padding()
                         
                         Divider()
+                    }.sheet(isPresented: $showUpdatePassword){
+                        UpdatePasswordView()
+                    }
                     }
                     
                 }
@@ -149,7 +151,7 @@ struct SettingsView: View {
                 NavigationView{
                     UpdateUserView(user: user, refresh: startSettings)
                 }
-            }
+        }
     }
     
     func startSettings() async {

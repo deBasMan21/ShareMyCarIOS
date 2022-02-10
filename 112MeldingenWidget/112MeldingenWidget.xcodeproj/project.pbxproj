@@ -1,0 +1,791 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EF862FDE27B4149700E15BB3 /* _12MeldingenWidgetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF862FDD27B4149700E15BB3 /* _12MeldingenWidgetApp.swift */; };
+		EF862FE027B4149700E15BB3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF862FDF27B4149700E15BB3 /* ContentView.swift */; };
+		EF862FE227B4149900E15BB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF862FE127B4149900E15BB3 /* Assets.xcassets */; };
+		EF862FE527B4149900E15BB3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF862FE427B4149900E15BB3 /* Preview Assets.xcassets */; };
+		EF86300E27B414C600E15BB3 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF86300D27B414C500E15BB3 /* WidgetKit.framework */; };
+		EF86301027B414C600E15BB3 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF86300F27B414C600E15BB3 /* SwiftUI.framework */; };
+		EF86301327B414C600E15BB3 /* _12Meldingen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF86301227B414C600E15BB3 /* _12Meldingen.swift */; };
+		EF86301627B414C700E15BB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF86301527B414C700E15BB3 /* Assets.xcassets */; };
+		EF86301827B414C700E15BB3 /* _12Meldingen.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = EF86301427B414C600E15BB3 /* _12Meldingen.intentdefinition */; };
+		EF86301927B414C700E15BB3 /* _12Meldingen.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = EF86301427B414C600E15BB3 /* _12Meldingen.intentdefinition */; };
+		EF86301C27B414C700E15BB3 /* 112MeldingenExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = EF86300B27B414C500E15BB3 /* 112MeldingenExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		EF86302227B417E500E15BB3 /* RssRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF86302127B417E500E15BB3 /* RssRequest.swift */; };
+		EF86302527B418BA00E15BB3 /* SWXMLHash in Frameworks */ = {isa = PBXBuildFile; productRef = EF86302427B418BA00E15BB3 /* SWXMLHash */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EF862FEB27B4149900E15BB3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EF862FD227B4149700E15BB3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EF862FD927B4149700E15BB3;
+			remoteInfo = 112MeldingenWidget;
+		};
+		EF862FF527B4149900E15BB3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EF862FD227B4149700E15BB3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EF862FD927B4149700E15BB3;
+			remoteInfo = 112MeldingenWidget;
+		};
+		EF86301A27B414C700E15BB3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EF862FD227B4149700E15BB3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EF86300A27B414C500E15BB3;
+			remoteInfo = 112MeldingenExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		EF86302027B414C700E15BB3 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				EF86301C27B414C700E15BB3 /* 112MeldingenExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		EF862FDA27B4149700E15BB3 /* 112MeldingenWidget.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 112MeldingenWidget.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF862FDD27B4149700E15BB3 /* _12MeldingenWidgetApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _12MeldingenWidgetApp.swift; sourceTree = "<group>"; };
+		EF862FDF27B4149700E15BB3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		EF862FE127B4149900E15BB3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EF862FE427B4149900E15BB3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		EF862FEA27B4149900E15BB3 /* 112MeldingenWidgetTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = 112MeldingenWidgetTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF862FF427B4149900E15BB3 /* 112MeldingenWidgetUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = 112MeldingenWidgetUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF86300B27B414C500E15BB3 /* 112MeldingenExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = 112MeldingenExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		EF86300D27B414C500E15BB3 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		EF86300F27B414C600E15BB3 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		EF86301227B414C600E15BB3 /* _12Meldingen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _12Meldingen.swift; sourceTree = "<group>"; };
+		EF86301427B414C600E15BB3 /* _12Meldingen.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = _12Meldingen.intentdefinition; sourceTree = "<group>"; };
+		EF86301527B414C700E15BB3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EF86301727B414C700E15BB3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EF86302127B417E500E15BB3 /* RssRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssRequest.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EF862FD727B4149700E15BB3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF86302527B418BA00E15BB3 /* SWXMLHash in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF862FE727B4149900E15BB3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF862FF127B4149900E15BB3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF86300827B414C500E15BB3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF86301027B414C600E15BB3 /* SwiftUI.framework in Frameworks */,
+				EF86300E27B414C600E15BB3 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EF862FD127B4149700E15BB3 = {
+			isa = PBXGroup;
+			children = (
+				EF862FDC27B4149700E15BB3 /* 112MeldingenWidget */,
+				EF86301127B414C600E15BB3 /* 112Meldingen */,
+				EF86300C27B414C500E15BB3 /* Frameworks */,
+				EF862FDB27B4149700E15BB3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EF862FDB27B4149700E15BB3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EF862FDA27B4149700E15BB3 /* 112MeldingenWidget.app */,
+				EF862FEA27B4149900E15BB3 /* 112MeldingenWidgetTests.xctest */,
+				EF862FF427B4149900E15BB3 /* 112MeldingenWidgetUITests.xctest */,
+				EF86300B27B414C500E15BB3 /* 112MeldingenExtension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EF862FDC27B4149700E15BB3 /* 112MeldingenWidget */ = {
+			isa = PBXGroup;
+			children = (
+				EF862FDD27B4149700E15BB3 /* _12MeldingenWidgetApp.swift */,
+				EF862FDF27B4149700E15BB3 /* ContentView.swift */,
+				EF862FE127B4149900E15BB3 /* Assets.xcassets */,
+				EF862FE327B4149900E15BB3 /* Preview Content */,
+			);
+			path = 112MeldingenWidget;
+			sourceTree = "<group>";
+		};
+		EF862FE327B4149900E15BB3 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				EF862FE427B4149900E15BB3 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		EF86300C27B414C500E15BB3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EF86300D27B414C500E15BB3 /* WidgetKit.framework */,
+				EF86300F27B414C600E15BB3 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EF86301127B414C600E15BB3 /* 112Meldingen */ = {
+			isa = PBXGroup;
+			children = (
+				EF86301227B414C600E15BB3 /* _12Meldingen.swift */,
+				EF86301427B414C600E15BB3 /* _12Meldingen.intentdefinition */,
+				EF86301527B414C700E15BB3 /* Assets.xcassets */,
+				EF86301727B414C700E15BB3 /* Info.plist */,
+				EF86302127B417E500E15BB3 /* RssRequest.swift */,
+			);
+			path = 112Meldingen;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EF862FD927B4149700E15BB3 /* 112MeldingenWidget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EF862FFE27B4149900E15BB3 /* Build configuration list for PBXNativeTarget "112MeldingenWidget" */;
+			buildPhases = (
+				EF862FD627B4149700E15BB3 /* Sources */,
+				EF862FD727B4149700E15BB3 /* Frameworks */,
+				EF862FD827B4149700E15BB3 /* Resources */,
+				EF86302027B414C700E15BB3 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EF86301B27B414C700E15BB3 /* PBXTargetDependency */,
+			);
+			name = 112MeldingenWidget;
+			packageProductDependencies = (
+				EF86302427B418BA00E15BB3 /* SWXMLHash */,
+			);
+			productName = 112MeldingenWidget;
+			productReference = EF862FDA27B4149700E15BB3 /* 112MeldingenWidget.app */;
+			productType = "com.apple.product-type.application";
+		};
+		EF862FE927B4149900E15BB3 /* 112MeldingenWidgetTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EF86300127B4149900E15BB3 /* Build configuration list for PBXNativeTarget "112MeldingenWidgetTests" */;
+			buildPhases = (
+				EF862FE627B4149900E15BB3 /* Sources */,
+				EF862FE727B4149900E15BB3 /* Frameworks */,
+				EF862FE827B4149900E15BB3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EF862FEC27B4149900E15BB3 /* PBXTargetDependency */,
+			);
+			name = 112MeldingenWidgetTests;
+			productName = 112MeldingenWidgetTests;
+			productReference = EF862FEA27B4149900E15BB3 /* 112MeldingenWidgetTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		EF862FF327B4149900E15BB3 /* 112MeldingenWidgetUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EF86300427B4149900E15BB3 /* Build configuration list for PBXNativeTarget "112MeldingenWidgetUITests" */;
+			buildPhases = (
+				EF862FF027B4149900E15BB3 /* Sources */,
+				EF862FF127B4149900E15BB3 /* Frameworks */,
+				EF862FF227B4149900E15BB3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EF862FF627B4149900E15BB3 /* PBXTargetDependency */,
+			);
+			name = 112MeldingenWidgetUITests;
+			productName = 112MeldingenWidgetUITests;
+			productReference = EF862FF427B4149900E15BB3 /* 112MeldingenWidgetUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		EF86300A27B414C500E15BB3 /* 112MeldingenExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EF86301D27B414C700E15BB3 /* Build configuration list for PBXNativeTarget "112MeldingenExtension" */;
+			buildPhases = (
+				EF86300727B414C500E15BB3 /* Sources */,
+				EF86300827B414C500E15BB3 /* Frameworks */,
+				EF86300927B414C500E15BB3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = 112MeldingenExtension;
+			productName = 112MeldingenExtension;
+			productReference = EF86300B27B414C500E15BB3 /* 112MeldingenExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EF862FD227B4149700E15BB3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1310;
+				LastUpgradeCheck = 1310;
+				TargetAttributes = {
+					EF862FD927B4149700E15BB3 = {
+						CreatedOnToolsVersion = 13.1;
+					};
+					EF862FE927B4149900E15BB3 = {
+						CreatedOnToolsVersion = 13.1;
+						TestTargetID = EF862FD927B4149700E15BB3;
+					};
+					EF862FF327B4149900E15BB3 = {
+						CreatedOnToolsVersion = 13.1;
+						TestTargetID = EF862FD927B4149700E15BB3;
+					};
+					EF86300A27B414C500E15BB3 = {
+						CreatedOnToolsVersion = 13.1;
+					};
+				};
+			};
+			buildConfigurationList = EF862FD527B4149700E15BB3 /* Build configuration list for PBXProject "112MeldingenWidget" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = EF862FD127B4149700E15BB3;
+			packageReferences = (
+				EF86302327B418BA00E15BB3 /* XCRemoteSwiftPackageReference "SWXMLHash" */,
+			);
+			productRefGroup = EF862FDB27B4149700E15BB3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EF862FD927B4149700E15BB3 /* 112MeldingenWidget */,
+				EF862FE927B4149900E15BB3 /* 112MeldingenWidgetTests */,
+				EF862FF327B4149900E15BB3 /* 112MeldingenWidgetUITests */,
+				EF86300A27B414C500E15BB3 /* 112MeldingenExtension */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EF862FD827B4149700E15BB3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF862FE527B4149900E15BB3 /* Preview Assets.xcassets in Resources */,
+				EF862FE227B4149900E15BB3 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF862FE827B4149900E15BB3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF862FF227B4149900E15BB3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF86300927B414C500E15BB3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF86301627B414C700E15BB3 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EF862FD627B4149700E15BB3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF86302227B417E500E15BB3 /* RssRequest.swift in Sources */,
+				EF862FE027B4149700E15BB3 /* ContentView.swift in Sources */,
+				EF86301927B414C700E15BB3 /* _12Meldingen.intentdefinition in Sources */,
+				EF862FDE27B4149700E15BB3 /* _12MeldingenWidgetApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF862FE627B4149900E15BB3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF862FF027B4149900E15BB3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EF86300727B414C500E15BB3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EF86301327B414C600E15BB3 /* _12Meldingen.swift in Sources */,
+				EF86301827B414C700E15BB3 /* _12Meldingen.intentdefinition in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EF862FEC27B4149900E15BB3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EF862FD927B4149700E15BB3 /* 112MeldingenWidget */;
+			targetProxy = EF862FEB27B4149900E15BB3 /* PBXContainerItemProxy */;
+		};
+		EF862FF627B4149900E15BB3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EF862FD927B4149700E15BB3 /* 112MeldingenWidget */;
+			targetProxy = EF862FF527B4149900E15BB3 /* PBXContainerItemProxy */;
+		};
+		EF86301B27B414C700E15BB3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EF86300A27B414C500E15BB3 /* 112MeldingenExtension */;
+			targetProxy = EF86301A27B414C700E15BB3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		EF862FFC27B4149900E15BB3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		EF862FFD27B4149900E15BB3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EF862FFF27B4149900E15BB3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"112MeldingenWidget/Preview Content\"";
+				DEVELOPMENT_TEAM = 963LK66N4P;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "nl.Buijsen.-12MeldingenWidget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		EF86300027B4149900E15BB3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"112MeldingenWidget/Preview Content\"";
+				DEVELOPMENT_TEAM = 963LK66N4P;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "nl.Buijsen.-12MeldingenWidget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		EF86300227B4149900E15BB3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 963LK66N4P;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "nl.Buijsen.-12MeldingenWidgetTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/112MeldingenWidget.app/112MeldingenWidget";
+			};
+			name = Debug;
+		};
+		EF86300327B4149900E15BB3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 963LK66N4P;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "nl.Buijsen.-12MeldingenWidgetTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/112MeldingenWidget.app/112MeldingenWidget";
+			};
+			name = Release;
+		};
+		EF86300527B4149900E15BB3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 963LK66N4P;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "nl.Buijsen.-12MeldingenWidgetUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = 112MeldingenWidget;
+			};
+			name = Debug;
+		};
+		EF86300627B4149900E15BB3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 963LK66N4P;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "nl.Buijsen.-12MeldingenWidgetUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = 112MeldingenWidget;
+			};
+			name = Release;
+		};
+		EF86301E27B414C700E15BB3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 963LK66N4P;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = 112Meldingen/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = 112Meldingen;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "nl.Buijsen.-12MeldingenWidget.-12Meldingen";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		EF86301F27B414C700E15BB3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 963LK66N4P;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = 112Meldingen/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = 112Meldingen;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "nl.Buijsen.-12MeldingenWidget.-12Meldingen";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EF862FD527B4149700E15BB3 /* Build configuration list for PBXProject "112MeldingenWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF862FFC27B4149900E15BB3 /* Debug */,
+				EF862FFD27B4149900E15BB3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EF862FFE27B4149900E15BB3 /* Build configuration list for PBXNativeTarget "112MeldingenWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF862FFF27B4149900E15BB3 /* Debug */,
+				EF86300027B4149900E15BB3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EF86300127B4149900E15BB3 /* Build configuration list for PBXNativeTarget "112MeldingenWidgetTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF86300227B4149900E15BB3 /* Debug */,
+				EF86300327B4149900E15BB3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EF86300427B4149900E15BB3 /* Build configuration list for PBXNativeTarget "112MeldingenWidgetUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF86300527B4149900E15BB3 /* Debug */,
+				EF86300627B4149900E15BB3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EF86301D27B414C700E15BB3 /* Build configuration list for PBXNativeTarget "112MeldingenExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EF86301E27B414C700E15BB3 /* Debug */,
+				EF86301F27B414C700E15BB3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		EF86302327B418BA00E15BB3 /* XCRemoteSwiftPackageReference "SWXMLHash" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/drmohundro/SWXMLHash.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		EF86302427B418BA00E15BB3 /* SWXMLHash */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EF86302327B418BA00E15BB3 /* XCRemoteSwiftPackageReference "SWXMLHash" */;
+			productName = SWXMLHash;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = EF862FD227B4149700E15BB3 /* Project object */;
+}

@@ -43,3 +43,11 @@ func apiLogout() async throws -> User? {
     
     return data?.result
 }
+
+func apiUpdatePassword(oldPassword: String, newPassword: String) async throws -> User? {
+    let json : [String: Any] = ["password": newPassword, "oldPassword": oldPassword]
+    
+    let data = try await apiCall(url: "\(apiURL)/authentication/password", body: json, method: "PUT", obj: UserWrapper(result: User(id: 0, name: "", email: "", phoneNumber: "", showEventsInCalendar: true, sendNotifications: true, profilePicture: "", cars: [])), authorized: true)
+    
+    return data?.result
+}

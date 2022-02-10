@@ -67,6 +67,7 @@
 		EFAEFF0627A8431A00A696AD /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAEFF0527A8431A00A696AD /* CalendarView.swift */; };
 		EFB0EC3B27AD23D0000F909C /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB0EC3A27AD23D0000F909C /* Icon.swift */; };
 		EFB0EC7927AD4036000F909C /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB0EC7827AD4036000F909C /* Loader.swift */; };
+		EFB8B42927B544750048F30C /* UpdatePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB8B42827B544750048F30C /* UpdatePasswordView.swift */; };
 		EFC6109827AC2DB200B4F0E6 /* UpdateUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFC6109727AC2DB200B4F0E6 /* UpdateUserView.swift */; };
 		EFEE516127A859A800F82F52 /* ViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEE516027A859A800F82F52 /* ViewExtension.swift */; };
 		EFEE516527A86CB300F82F52 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFEE516427A86CB300F82F52 /* ImagePicker.swift */; };
@@ -155,6 +156,7 @@
 		EFB0EC3727AD21DE000F909C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		EFB0EC3A27AD23D0000F909C /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
 		EFB0EC7827AD4036000F909C /* Loader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
+		EFB8B42827B544750048F30C /* UpdatePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePasswordView.swift; sourceTree = "<group>"; };
 		EFC6109727AC2DB200B4F0E6 /* UpdateUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserView.swift; sourceTree = "<group>"; };
 		EFEE516027A859A800F82F52 /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
 		EFEE516427A86CB300F82F52 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
@@ -349,6 +351,7 @@
 			children = (
 				EF518D5927A29FA70082CC0A /* SettingsView.swift */,
 				EFC6109727AC2DB200B4F0E6 /* UpdateUserView.swift */,
+				EFB8B42827B544750048F30C /* UpdatePasswordView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -631,6 +634,7 @@
 				EF518D7F27A2D4D70082CC0A /* CarWrapper.swift in Sources */,
 				EF518D8D27A319230082CC0A /* RideDetailView.swift in Sources */,
 				EF518D6527A2A0EA0082CC0A /* GeneralPageLayout.swift in Sources */,
+				EFB8B42927B544750048F30C /* UpdatePasswordView.swift in Sources */,
 				EF518DAC27A41E4B0082CC0A /* LoadingView.swift in Sources */,
 				EF518D9927A3F39B0082CC0A /* LocationWrapper.swift in Sources */,
 				EF518D6B27A2A7CF0082CC0A /* Ride.swift in Sources */,

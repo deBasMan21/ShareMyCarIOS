@@ -14,6 +14,7 @@ struct RidesView: View {
     @State var events: [Event] = []
     @State var size : CGRect = CGRect(x: 0, y: 0, width: 0, height: 0)
     @Binding var user : User
+    @AppStorage("showEventsInCalendar") private var showEvents = false
     @State var showNewRide : Bool = false
     @State var showRideDetail : Bool = false
     @State var lastRide : Ride = Ride(id: 0, name: "", beginDateTime: "", endDateTime: "", reservationDateTime: "", lastChangeDateTime: "")
@@ -85,7 +86,7 @@ struct RidesView: View {
                 events.append(event)
             }
             
-            if user.showEventsInCalendar {
+            if showEvents {
                 let store = EKEventStore()
 
                 let calendars = store.calendars(for: .event)
